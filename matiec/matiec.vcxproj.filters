@@ -1,0 +1,371 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\stage1_2">
+      <UniqueIdentifier>{9bb72e58-7e8b-4dad-86ab-215bbd501b70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\stage3">
+      <UniqueIdentifier>{fc177b1a-d836-4cad-a12b-08fbf76a0518}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\stage4">
+      <UniqueIdentifier>{befa7629-3e05-41bc-9ebf-811476d38637}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\stage1_2">
+      <UniqueIdentifier>{e90e77d9-25d0-4bdd-86db-c397b67f6d26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\stage3">
+      <UniqueIdentifier>{1e9c7941-0f9b-4bc3-b368-e60c66566f35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\stage4">
+      <UniqueIdentifier>{d13ee2fd-02a3-40c9-8097-44b8d40dfa56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\stage1_2">
+      <UniqueIdentifier>{2adc5de3-03b8-442d-b468-e0feccbe644c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\stage4\generate_iec">
+      <UniqueIdentifier>{feb69c61-2f63-4d95-8913-01af20301b8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\stage4\generate_cc">
+      <UniqueIdentifier>{59579bce-514f-46ec-ae3f-4718954f17bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\stage4\generate_c">
+      <UniqueIdentifier>{02cf3b80-e439-4684-8c80-6653385c2f59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\stage4\generate_iec">
+      <UniqueIdentifier>{5ab0c5de-dd9b-4055-a3b8-ba8a308933de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\stage4\generate_c">
+      <UniqueIdentifier>{0ae79f26-aa76-41d5-9b58-a389bcbea22a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\stage4\generate_cc">
+      <UniqueIdentifier>{c116f18b-0913-476e-936e-37aef97d7d1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\absyntax_utils">
+      <UniqueIdentifier>{78bb43a1-0e15-4be9-b1f4-a0e7fc93905f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\absyntax_utils">
+      <UniqueIdentifier>{286401ed-d1a0-4fd8-8d28-841f4ca72432}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\absyntax">
+      <UniqueIdentifier>{0bcca7c7-2b72-4afe-865f-54a11d9318d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\absyntax">
+      <UniqueIdentifier>{625dc6d7-bbb5-4316-9ede-a97e21005f3b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stage1_2\create_enumtype_conversion_functions.cpp">
+      <Filter>Source Files\stage1_2</Filter>
+    </ClCompile>
+    <ClCompile Include="stage1_2\stage1_2.cpp">
+      <Filter>Source Files\stage1_2</Filter>
+    </ClCompile>
+    <ClCompile Include="stage1_2\standard_function_names.c">
+      <Filter>Source Files\stage1_2</Filter>
+    </ClCompile>
+    <ClCompile Include="stage3\array_range_check.cpp">
+      <Filter>Source Files\stage3</Filter>
+    </ClCompile>
+    <ClCompile Include="stage3\case_elements_check.cpp">
+      <Filter>Source Files\stage3</Filter>
+    </ClCompile>
+    <ClCompile Include="stage3\constant_folding.cpp">
+      <Filter>Source Files\stage3</Filter>
+    </ClCompile>
+    <ClCompile Include="stage3\datatype_functions.cpp">
+      <Filter>Source Files\stage3</Filter>
+    </ClCompile>
+    <ClCompile Include="stage3\declaration_check.cpp">
+      <Filter>Source Files\stage3</Filter>
+    </ClCompile>
+    <ClCompile Include="stage3\enum_declaration_check.cpp">
+      <Filter>Source Files\stage3</Filter>
+    </ClCompile>
+    <ClCompile Include="stage3\fill_candidate_datatypes.cpp">
+      <Filter>Source Files\stage3</Filter>
+    </ClCompile>
+    <ClCompile Include="stage3\flow_control_analysis.cpp">
+      <Filter>Source Files\stage3</Filter>
+    </ClCompile>
+    <ClCompile Include="stage3\forced_narrow_candidate_datatypes.cpp">
+      <Filter>Source Files\stage3</Filter>
+    </ClCompile>
+    <ClCompile Include="stage3\lvalue_check.cpp">
+      <Filter>Source Files\stage3</Filter>
+    </ClCompile>
+    <ClCompile Include="stage3\narrow_candidate_datatypes.cpp">
+      <Filter>Source Files\stage3</Filter>
+    </ClCompile>
+    <ClCompile Include="stage3\print_datatypes_error.cpp">
+      <Filter>Source Files\stage3</Filter>
+    </ClCompile>
+    <ClCompile Include="stage3\remove_forward_dependencies.cpp">
+      <Filter>Source Files\stage3</Filter>
+    </ClCompile>
+    <ClCompile Include="stage3\stage3.cpp">
+      <Filter>Source Files\stage3</Filter>
+    </ClCompile>
+    <ClCompile Include="stage4\stage4.cpp">
+      <Filter>Source Files\stage4</Filter>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_c.cpp">
+      <Filter>Source Files\stage4\generate_c</Filter>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_c_base.cpp">
+      <Filter>Source Files\stage4\generate_c</Filter>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_c_configbody.cpp">
+      <Filter>Source Files\stage4\generate_c</Filter>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_c_il.cpp">
+      <Filter>Source Files\stage4\generate_c</Filter>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_c_inlinefcall.cpp">
+      <Filter>Source Files\stage4\generate_c</Filter>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_c_sfc.cpp">
+      <Filter>Source Files\stage4\generate_c</Filter>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_c_sfcdecl.cpp">
+      <Filter>Source Files\stage4\generate_c</Filter>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_c_st.cpp">
+      <Filter>Source Files\stage4\generate_c</Filter>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_c_typedecl.cpp">
+      <Filter>Source Files\stage4\generate_c</Filter>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_c_vardecl.cpp">
+      <Filter>Source Files\stage4\generate_c</Filter>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_location_list.cpp">
+      <Filter>Source Files\stage4\generate_c</Filter>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_var_list.cpp">
+      <Filter>Source Files\stage4\generate_c</Filter>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_iec\generate_iec.cpp">
+      <Filter>Source Files\stage4\generate_iec</Filter>
+    </ClCompile>
+    <ClCompile Include="absyntax_utils\absyntax_utils.cpp">
+      <Filter>Source Files\absyntax_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="absyntax_utils\add_en_eno_param_decl.cpp">
+      <Filter>Source Files\absyntax_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="absyntax_utils\array_dimension_iterator.cpp">
+      <Filter>Source Files\absyntax_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="absyntax_utils\case_element_iterator.cpp">
+      <Filter>Source Files\absyntax_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="absyntax_utils\debug_ast.cpp">
+      <Filter>Source Files\absyntax_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="absyntax_utils\decompose_var_instance_name.cpp">
+      <Filter>Source Files\absyntax_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="absyntax_utils\function_call_iterator.cpp">
+      <Filter>Source Files\absyntax_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="absyntax_utils\function_call_param_iterator.cpp">
+      <Filter>Source Files\absyntax_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="absyntax_utils\function_param_iterator.cpp">
+      <Filter>Source Files\absyntax_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="absyntax_utils\get_datatype_info.cpp">
+      <Filter>Source Files\absyntax_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="absyntax_utils\get_sizeof_datatype.cpp">
+      <Filter>Source Files\absyntax_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="absyntax_utils\get_var_name.cpp">
+      <Filter>Source Files\absyntax_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="absyntax_utils\search_base_type.cpp">
+      <Filter>Source Files\absyntax_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="absyntax_utils\search_fb_instance_decl.cpp">
+      <Filter>Source Files\absyntax_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="absyntax_utils\search_fb_typedecl.cpp">
+      <Filter>Source Files\absyntax_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="absyntax_utils\search_il_label.cpp">
+      <Filter>Source Files\absyntax_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="absyntax_utils\search_var_instance_decl.cpp">
+      <Filter>Source Files\absyntax_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="absyntax_utils\search_varfb_instance_type.cpp">
+      <Filter>Source Files\absyntax_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="absyntax_utils\spec_init_separator.cpp">
+      <Filter>Source Files\absyntax_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="absyntax_utils\type_initial_value.cpp">
+      <Filter>Source Files\absyntax_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="absyntax\absyntax.cpp">
+      <Filter>Source Files\absyntax</Filter>
+    </ClCompile>
+    <ClCompile Include="absyntax\visitor.cpp">
+      <Filter>Source Files\absyntax</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stage1_2\create_enumtype_conversion_functions.h">
+      <Filter>Header Files\stage1_2</Filter>
+    </ClInclude>
+    <ClInclude Include="stage1_2\stage1_2.h">
+      <Filter>Header Files\stage1_2</Filter>
+    </ClInclude>
+    <ClInclude Include="stage1_2\stage1_2_priv.h">
+      <Filter>Header Files\stage1_2</Filter>
+    </ClInclude>
+    <ClInclude Include="stage3\array_range_check.h">
+      <Filter>Header Files\stage3</Filter>
+    </ClInclude>
+    <ClInclude Include="stage3\case_elements_check.h">
+      <Filter>Header Files\stage3</Filter>
+    </ClInclude>
+    <ClInclude Include="stage3\constant_folding.h">
+      <Filter>Header Files\stage3</Filter>
+    </ClInclude>
+    <ClInclude Include="stage3\datatype_functions.h">
+      <Filter>Header Files\stage3</Filter>
+    </ClInclude>
+    <ClInclude Include="stage3\declaration_check.h">
+      <Filter>Header Files\stage3</Filter>
+    </ClInclude>
+    <ClInclude Include="stage3\enum_declaration_check.h">
+      <Filter>Header Files\stage3</Filter>
+    </ClInclude>
+    <ClInclude Include="stage3\fill_candidate_datatypes.h">
+      <Filter>Header Files\stage3</Filter>
+    </ClInclude>
+    <ClInclude Include="stage3\flow_control_analysis.h">
+      <Filter>Header Files\stage3</Filter>
+    </ClInclude>
+    <ClInclude Include="stage3\forced_narrow_candidate_datatypes.h">
+      <Filter>Header Files\stage3</Filter>
+    </ClInclude>
+    <ClInclude Include="stage3\lvalue_check.h">
+      <Filter>Header Files\stage3</Filter>
+    </ClInclude>
+    <ClInclude Include="stage3\narrow_candidate_datatypes.h">
+      <Filter>Header Files\stage3</Filter>
+    </ClInclude>
+    <ClInclude Include="stage3\print_datatypes_error.h">
+      <Filter>Header Files\stage3</Filter>
+    </ClInclude>
+    <ClInclude Include="stage3\remove_forward_dependencies.h">
+      <Filter>Header Files\stage3</Filter>
+    </ClInclude>
+    <ClInclude Include="stage3\stage3.h">
+      <Filter>Header Files\stage3</Filter>
+    </ClInclude>
+    <ClInclude Include="stage4\stage4.h">
+      <Filter>Header Files\stage4</Filter>
+    </ClInclude>
+    <ClInclude Include="stage4\generate_c\generate_c.h">
+      <Filter>Header Files\stage4\generate_c</Filter>
+    </ClInclude>
+    <ClInclude Include="stage4\generate_c\plc.h">
+      <Filter>Header Files\stage4\generate_c</Filter>
+    </ClInclude>
+    <ClInclude Include="stage4\generate_c\types.h">
+      <Filter>Header Files\stage4\generate_c</Filter>
+    </ClInclude>
+    <ClInclude Include="absyntax_utils\absyntax_utils.h">
+      <Filter>Header Files\absyntax_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="absyntax_utils\add_en_eno_param_decl.h">
+      <Filter>Header Files\absyntax_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="absyntax_utils\array_dimension_iterator.h">
+      <Filter>Header Files\absyntax_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="absyntax_utils\case_element_iterator.h">
+      <Filter>Header Files\absyntax_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="absyntax_utils\debug_ast.h">
+      <Filter>Header Files\absyntax_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="absyntax_utils\decompose_var_instance_name.h">
+      <Filter>Header Files\absyntax_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="absyntax_utils\function_call_iterator.h">
+      <Filter>Header Files\absyntax_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="absyntax_utils\function_call_param_iterator.h">
+      <Filter>Header Files\absyntax_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="absyntax_utils\function_param_iterator.h">
+      <Filter>Header Files\absyntax_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="absyntax_utils\get_datatype_info.h">
+      <Filter>Header Files\absyntax_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="absyntax_utils\get_sizeof_datatype.h">
+      <Filter>Header Files\absyntax_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="absyntax_utils\get_var_name.h">
+      <Filter>Header Files\absyntax_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="absyntax_utils\search_base_type.h">
+      <Filter>Header Files\absyntax_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="absyntax_utils\search_fb_instance_decl.h">
+      <Filter>Header Files\absyntax_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="absyntax_utils\search_fb_typedecl.h">
+      <Filter>Header Files\absyntax_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="absyntax_utils\search_il_label.h">
+      <Filter>Header Files\absyntax_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="absyntax_utils\search_var_instance_decl.h">
+      <Filter>Header Files\absyntax_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="absyntax_utils\search_varfb_instance_type.h">
+      <Filter>Header Files\absyntax_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="absyntax_utils\spec_init_separator.h">
+      <Filter>Header Files\absyntax_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="absyntax_utils\type_initial_value.h">
+      <Filter>Header Files\absyntax_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="absyntax\absyntax.h">
+      <Filter>Header Files\absyntax</Filter>
+    </ClInclude>
+    <ClInclude Include="absyntax\visitor.h">
+      <Filter>Header Files\absyntax</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="stage1_2\iec_flex.ll">
+      <Filter>Resource Files\stage1_2</Filter>
+    </None>
+    <None Include="stage1_2\iec_bison.yy">
+      <Filter>Resource Files\stage1_2</Filter>
+    </None>
+    <None Include="absyntax\absyntax.def">
+      <Filter>Header Files\absyntax</Filter>
+    </None>
+  </ItemGroup>
+</Project>

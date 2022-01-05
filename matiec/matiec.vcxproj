@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="absyntax\absyntax.cpp" />
+    <ClCompile Include="absyntax\visitor.cpp" />
+    <ClCompile Include="absyntax_utils\absyntax_utils.cpp" />
+    <ClCompile Include="absyntax_utils\add_en_eno_param_decl.cpp" />
+    <ClCompile Include="absyntax_utils\array_dimension_iterator.cpp" />
+    <ClCompile Include="absyntax_utils\case_element_iterator.cpp" />
+    <ClCompile Include="absyntax_utils\debug_ast.cpp" />
+    <ClCompile Include="absyntax_utils\decompose_var_instance_name.cpp" />
+    <ClCompile Include="absyntax_utils\function_call_iterator.cpp" />
+    <ClCompile Include="absyntax_utils\function_call_param_iterator.cpp" />
+    <ClCompile Include="absyntax_utils\function_param_iterator.cpp" />
+    <ClCompile Include="absyntax_utils\get_datatype_info.cpp" />
+    <ClCompile Include="absyntax_utils\get_sizeof_datatype.cpp" />
+    <ClCompile Include="absyntax_utils\get_var_name.cpp" />
+    <ClCompile Include="absyntax_utils\search_base_type.cpp" />
+    <ClCompile Include="absyntax_utils\search_fb_instance_decl.cpp" />
+    <ClCompile Include="absyntax_utils\search_fb_typedecl.cpp" />
+    <ClCompile Include="absyntax_utils\search_il_label.cpp" />
+    <ClCompile Include="absyntax_utils\search_varfb_instance_type.cpp" />
+    <ClCompile Include="absyntax_utils\search_var_instance_decl.cpp" />
+    <ClCompile Include="absyntax_utils\spec_init_separator.cpp" />
+    <ClCompile Include="absyntax_utils\type_initial_value.cpp" />
+    <ClCompile Include="stage1_2\create_enumtype_conversion_functions.cpp" />
+    <ClCompile Include="stage1_2\stage1_2.cpp" />
+    <ClCompile Include="stage1_2\standard_function_names.c" />
+    <ClCompile Include="stage3\array_range_check.cpp" />
+    <ClCompile Include="stage3\case_elements_check.cpp" />
+    <ClCompile Include="stage3\constant_folding.cpp" />
+    <ClCompile Include="stage3\datatype_functions.cpp" />
+    <ClCompile Include="stage3\declaration_check.cpp" />
+    <ClCompile Include="stage3\enum_declaration_check.cpp" />
+    <ClCompile Include="stage3\fill_candidate_datatypes.cpp" />
+    <ClCompile Include="stage3\flow_control_analysis.cpp" />
+    <ClCompile Include="stage3\forced_narrow_candidate_datatypes.cpp" />
+    <ClCompile Include="stage3\lvalue_check.cpp" />
+    <ClCompile Include="stage3\narrow_candidate_datatypes.cpp" />
+    <ClCompile Include="stage3\print_datatypes_error.cpp" />
+    <ClCompile Include="stage3\remove_forward_dependencies.cpp" />
+    <ClCompile Include="stage3\stage3.cpp" />
+    <ClCompile Include="stage4\generate_c\generate_c.cpp" />
+    <ClCompile Include="stage4\generate_c\generate_c_base.cpp" />
+    <ClCompile Include="stage4\generate_c\generate_c_configbody.cpp" />
+    <ClCompile Include="stage4\generate_c\generate_c_il.cpp" />
+    <ClCompile Include="stage4\generate_c\generate_c_inlinefcall.cpp" />
+    <ClCompile Include="stage4\generate_c\generate_c_sfc.cpp" />
+    <ClCompile Include="stage4\generate_c\generate_c_sfcdecl.cpp" />
+    <ClCompile Include="stage4\generate_c\generate_c_st.cpp" />
+    <ClCompile Include="stage4\generate_c\generate_c_typedecl.cpp" />
+    <ClCompile Include="stage4\generate_c\generate_c_vardecl.cpp" />
+    <ClCompile Include="stage4\generate_c\generate_location_list.cpp" />
+    <ClCompile Include="stage4\generate_c\generate_var_list.cpp" />
+    <ClCompile Include="stage4\generate_iec\generate_iec.cpp" />
+    <ClCompile Include="stage4\stage4.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="absyntax\absyntax.h" />
+    <ClInclude Include="absyntax\visitor.h" />
+    <ClInclude Include="absyntax_utils\absyntax_utils.h" />
+    <ClInclude Include="absyntax_utils\add_en_eno_param_decl.h" />
+    <ClInclude Include="absyntax_utils\array_dimension_iterator.h" />
+    <ClInclude Include="absyntax_utils\case_element_iterator.h" />
+    <ClInclude Include="absyntax_utils\debug_ast.h" />
+    <ClInclude Include="absyntax_utils\decompose_var_instance_name.h" />
+    <ClInclude Include="absyntax_utils\function_call_iterator.h" />
+    <ClInclude Include="absyntax_utils\function_call_param_iterator.h" />
+    <ClInclude Include="absyntax_utils\function_param_iterator.h" />
+    <ClInclude Include="absyntax_utils\get_datatype_info.h" />
+    <ClInclude Include="absyntax_utils\get_sizeof_datatype.h" />
+    <ClInclude Include="absyntax_utils\get_var_name.h" />
+    <ClInclude Include="absyntax_utils\search_base_type.h" />
+    <ClInclude Include="absyntax_utils\search_fb_instance_decl.h" />
+    <ClInclude Include="absyntax_utils\search_fb_typedecl.h" />
+    <ClInclude Include="absyntax_utils\search_il_label.h" />
+    <ClInclude Include="absyntax_utils\search_varfb_instance_type.h" />
+    <ClInclude Include="absyntax_utils\search_var_instance_decl.h" />
+    <ClInclude Include="absyntax_utils\spec_init_separator.h" />
+    <ClInclude Include="absyntax_utils\type_initial_value.h" />
+    <ClInclude Include="stage1_2\create_enumtype_conversion_functions.h" />
+    <ClInclude Include="stage1_2\stage1_2.h" />
+    <ClInclude Include="stage1_2\stage1_2_priv.h" />
+    <ClInclude Include="stage3\array_range_check.h" />
+    <ClInclude Include="stage3\case_elements_check.h" />
+    <ClInclude Include="stage3\constant_folding.h" />
+    <ClInclude Include="stage3\datatype_functions.h" />
+    <ClInclude Include="stage3\declaration_check.h" />
+    <ClInclude Include="stage3\enum_declaration_check.h" />
+    <ClInclude Include="stage3\fill_candidate_datatypes.h" />
+    <ClInclude Include="stage3\flow_control_analysis.h" />
+    <ClInclude Include="stage3\forced_narrow_candidate_datatypes.h" />
+    <ClInclude Include="stage3\lvalue_check.h" />
+    <ClInclude Include="stage3\narrow_candidate_datatypes.h" />
+    <ClInclude Include="stage3\print_datatypes_error.h" />
+    <ClInclude Include="stage3\remove_forward_dependencies.h" />
+    <ClInclude Include="stage3\stage3.h" />
+    <ClInclude Include="stage4\generate_c\generate_c.h" />
+    <ClInclude Include="stage4\generate_c\plc.h" />
+    <ClInclude Include="stage4\generate_c\types.h" />
+    <ClInclude Include="stage4\stage4.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="absyntax\absyntax.def" />
+    <None Include="stage1_2\iec_bison.yy" />
+    <None Include="stage1_2\iec_flex.ll" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{53f7b7f9-597e-422a-9d98-e7528823c277}</ProjectGuid>
+    <RootNamespace>matiec</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\obj\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>./</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
