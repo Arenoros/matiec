@@ -3,21 +3,27 @@
 Language:        Cpp
 # BasedOnStyle:  Google
 AccessModifierOffset: -4
- 
+IndentWidth: 4
+UseTab: Never
+
 ColumnLimit:    120
+# Align Options
 AlignAfterOpenBracket: Align
 AlignConsecutiveAssignments: false
 AlignConsecutiveDeclarations: false
 AlignEscapedNewlines: Right
 AlignOperands:   true
 AlignTrailingComments: true
+AlignArrayOfStructures: Left
+AlignConsecutiveBitFields: AcrossComments
 
 AllowAllParametersOfDeclarationOnNextLine: false
-AllowShortBlocksOnASingleLine: false
+AllowShortBlocksOnASingleLine: Empty
 AllowShortCaseLabelsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: Empty
 AllowShortIfStatementsOnASingleLine: Never
 AllowShortLoopsOnASingleLine: false
+AllowShortEnumsOnASingleLine: false
 #AllowShortLambdasOnASingleLine: SLS_Empty 
 #AlwaysBreakAfterDefinitionReturnType: None
 AlwaysBreakAfterReturnType: None
@@ -154,8 +160,6 @@ SpacesInSquareBrackets: false
 Standard:        Auto
 TabWidth:        4
 UseTab:          Never
-
-
 
 ---
 Language: JavaScript

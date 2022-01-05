@@ -162,7 +162,7 @@ class generate_c_array_initialization_c: public generate_c_base_and_typeid_c {
     void *visit(var1_list_c *symbol) {
       int i, j;
       
-      for (i = 0; i < symbol->n; i++) {
+      for (i = 0; i < symbol->size(); i++) {
         s4o.print(s4o.indent_spaces);
         s4o.print(SET_VAR);
         s4o.print("(");
@@ -243,7 +243,7 @@ class generate_c_array_initialization_c: public generate_c_base_and_typeid_c {
       switch (current_mode) {
         case initializationvalue_am:
           current_initialization_count = 0;
-          for (int i = 0; i < symbol->n; i++) {
+          for (int i = 0; i < symbol->size(); i++) {
             if (current_initialization_count >= defined_values_count) {
               if (defined_values_count >= array_size)
                 ERROR;
@@ -413,7 +413,7 @@ class structure_element_iterator_c : public null_visitor_c {
     /* structure_element_declaration_list structure_element_declaration ';' */
     void *visit(structure_element_declaration_list_c *symbol) {
       void *res;
-      for (int i = 0; i < symbol->n; i++) {
+      for (int i = 0; i < symbol->size(); i++) {
         res = symbol->get_element(i)->accept(*this);
         if (res != NULL)
           return res;
@@ -471,7 +471,7 @@ class structure_init_element_iterator_c : public null_visitor_c {
     /* structure_element_initialization_list ',' structure_element_initialization */
     void *visit(structure_element_initialization_list_c *symbol) {
       void *res;
-      for (int i = 0; i < symbol->n; i++) {
+      for (int i = 0; i < symbol->size(); i++) {
         res = symbol->get_element(i)->accept(*this);
         if (res != NULL)
           return res;
@@ -593,7 +593,7 @@ class generate_c_structure_initialization_c: public generate_c_base_and_typeid_c
     void *visit(var1_list_c *symbol) {
       int i, j;
       
-      for (i = 0; i < symbol->n; i++) {
+      for (i = 0; i < symbol->size(); i++) {
         s4o.print(s4o.indent_spaces);
         s4o.print(SET_VAR);
         s4o.print("(");
@@ -973,7 +973,7 @@ class generate_c_vardecl_c: protected generate_c_base_and_typeid_c {
       structure_element_initialization_list_c *init_list = dynamic_cast<structure_element_initialization_list_c *>(init_values_list);
       if (NULL == init_list) ERROR;
       
-      for (int i = 0; i < init_list->n; i++) {
+      for (int i = 0; i < init_list->size(); i++) {
         structure_element_initialization_c *init_list_elem = dynamic_cast<structure_element_initialization_c *>(init_list->get_element(i));
         if (NULL == init_list_elem) ERROR;
         if (!get_datatype_info_c::is_ANY_ELEMENTARY(init_list_elem->value->datatype)) {
@@ -1010,7 +1010,7 @@ class generate_c_vardecl_c: protected generate_c_base_and_typeid_c {
       if ((wanted_varformat == local_vf) ||
           (wanted_varformat == init_vf) ||
           (wanted_varformat == localinit_vf)) {
-        for(int i = 0; i < list->n; i++) {
+        for(int i = 0; i < list->size(); i++) {
           s4o.print(s4o.indent_spaces);
           if (wanted_varformat == local_vf) {
             if (!is_fb) {
@@ -1090,7 +1090,7 @@ class generate_c_vardecl_c: protected generate_c_base_and_typeid_c {
       }
 
       if (wanted_varformat == finterface_vf) {
-        for(int i = 0; i < list->n; i++) {
+        for(int i = 0; i < list->size(); i++) {
           finterface_var_count++;
           s4o.print(nv->get());
           s4o.print("\n" + s4o.indent_spaces);
@@ -1111,7 +1111,7 @@ class generate_c_vardecl_c: protected generate_c_base_and_typeid_c {
       }
 
       if (wanted_varformat == foutputassign_vf) {
-        for(int i = 0; i < list->n; i++) {
+        for(int i = 0; i < list->size(); i++) {
           if ((current_vartype & (output_vt | inoutput_vt)) != 0) {
             s4o.print(s4o.indent_spaces + "if (__");
             list->get_element(i)->accept(*this);
@@ -1129,7 +1129,7 @@ class generate_c_vardecl_c: protected generate_c_base_and_typeid_c {
       }
 
       if (wanted_varformat == constructorinit_vf) {
-        for(int i = 0; i < list->n; i++) {
+        for(int i = 0; i < list->size(); i++) {
           if (is_fb) {
             /* If we are declaring and/or initializing a FB instance, then we
              * simply call the FBNAME_init__() function, which will initialise the
@@ -2150,7 +2150,7 @@ void *visit(global_var_list_c *symbol) {
   switch (wanted_varformat) {
     case local_vf:
     case localinit_vf:
-      for(int i = 0; i < list->n; i++) {
+      for(int i = 0; i < list->size(); i++) {
         s4o.print(s4o.indent_spaces);
         if (is_fb)
           s4o.print(DECLARE_GLOBAL_FB);
@@ -2169,7 +2169,7 @@ void *visit(global_var_list_c *symbol) {
 
     case constructorinit_vf:
       if (this->current_var_init_symbol != NULL || is_fb) {
-        for(int i = 0; i < list->n; i++) {
+        for(int i = 0; i < list->size(); i++) {
           s4o.print(nv->get());
 
           if (is_fb)
@@ -2218,7 +2218,7 @@ void *visit(global_var_list_c *symbol) {
       break;
 
     case globalprototype_vf:
-      for(int i = 0; i < list->n; i++) {
+      for(int i = 0; i < list->size(); i++) {
         s4o.print(s4o.indent_spaces);
         s4o.print(DECLARE_GLOBAL_PROTOTYPE);
         s4o.print("(");

@@ -417,7 +417,7 @@ void *visit(array_variable_c *symbol) {
 /* subscript_list ',' subscript */
 void *visit(subscript_list_c *symbol) {
   array_dimension_iterator_c* array_dimension_iterator = new array_dimension_iterator_c(current_array_type);
-  for (int i =  0; i < symbol->n; i++) {
+  for (int i =  0; i < symbol->size(); i++) {
     symbol_c* dimension = array_dimension_iterator->next();
     if (dimension == NULL) ERROR;
 
@@ -924,7 +924,7 @@ void *visit(function_invocation_c *symbol) {
 /* B 3.2 Statements */
 /********************/
 void *visit(statement_list_c *symbol) {
-  for(int i = 0; i < symbol->n; i++) {
+  for(int i = 0; i < symbol->size(); i++) {
     print_line_directive(symbol->get_element(i));
     s4o.print(s4o.indent_spaces);
     symbol->get_element(i)->accept(*this);
@@ -1201,7 +1201,7 @@ void *visit(case_element_c *symbol) {
 
 void *visit(case_list_c *symbol) {
   s4o.print("(");
-  for (int i =  0; i < symbol->n; i++) {
+  for (int i =  0; i < symbol->size(); i++) {
     /* if not the first element, then add an '||', a '\n', and add some spaces to get nice alignment */
     /* example of generated C code (codition) for 
      *   case XX of

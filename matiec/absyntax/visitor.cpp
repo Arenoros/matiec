@@ -46,11 +46,6 @@
  */
 
 
-
-
-
-#include <unistd.h>
-
 #include <stdio.h>  /* required for NULL */
 #include "visitor.h"
 
@@ -167,7 +162,7 @@ iterator_visitor_c::~iterator_visitor_c(void) {return;}
 
 
 void *iterator_visitor_c::visit_list(list_c *list) {
-  for(int i = 0; i < list->n; i++) {
+  for(int i = 0; i < list->size(); i++) {
     list->get_element(i)->accept(*this);
   }
   return NULL;
@@ -309,7 +304,7 @@ search_visitor_c::~search_visitor_c(void) {return;}
 
 
 void *search_visitor_c::visit_list(list_c *list) {
-  for(int i = 0; i < list->n; i++) {
+  for(int i = 0; i < list->size(); i++) {
     void *res = list->get_element(i)->accept(*this);
     if (res != NULL)
       return res;

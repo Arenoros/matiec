@@ -312,7 +312,7 @@ void *search_var_instance_decl_c::visit(var1_init_decl_c *symbol) {
 // SYM_LIST(var1_list_c)
 void *search_var_instance_decl_c::visit(var1_list_c *symbol) {
   list_c *list = symbol;
-  for(int i = 0; i < list->n; i++) {
+  for(int i = 0; i < list->size(); i++) {
     if (compare_identifiers(list->get_element(i), search_name) == 0)
    /* by now, current_type_decl should be != NULL */
       return current_type_decl;
@@ -334,7 +334,7 @@ void *search_var_instance_decl_c::visit(fb_name_decl_c *symbol) {
 /* name_list ',' fb_name */
 void *search_var_instance_decl_c::visit(fb_name_list_c *symbol) {
   list_c *list = symbol;
-  for(int i = 0; i < list->n; i++) {
+  for(int i = 0; i < list->size(); i++) {
     if (compare_identifiers(list->get_element(i), search_name) == 0)
     /* by now, current_fb_declaration should be != NULL */
       return current_type_decl;
@@ -408,7 +408,7 @@ void *search_var_instance_decl_c::visit(global_var_spec_c *symbol) {
 //SYM_LIST(global_var_list_c)
 void *search_var_instance_decl_c::visit(global_var_list_c *symbol) {
   list_c *list = symbol;
-  for(int i = 0; i < list->n; i++) {
+  for(int i = 0; i < list->size(); i++) {
     if (compare_identifiers(list->get_element(i), search_name) == 0)
       /* by now, current_type_decl should be != NULL */
       return current_type_decl;

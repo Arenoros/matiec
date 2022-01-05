@@ -30,9 +30,9 @@
  * overloading in the standard library.
  */
 
-
+#pragma once
 #include <iostream>
-#include "symtable.h"
+#include "dsymtable.h"
 #include "main.h" // required for ERROR() and ERROR_MSG() macros.
 
 

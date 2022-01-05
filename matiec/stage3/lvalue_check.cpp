@@ -84,8 +84,6 @@ int lvalue_check_c::get_error_count() {
 	return error_count;
 }
 
-
-#include <strings.h>
 /* No writing to iterator variables (used in FOR loops) inside the loop itself */
 void lvalue_check_c::check_assignment_to_controlvar(symbol_c *lvalue) {
 	for (unsigned int i = 0; i < control_variables.size(); i++) {
@@ -471,7 +469,7 @@ void *lvalue_check_c::visit(il_function_call_c *symbol) {
 
 	/* Undo the changes to the abstract syntax tree we made above... */
 	((list_c *)symbol->il_operand_list)->remove_element(0);
-	if (((list_c *)symbol->il_operand_list)->n == 0) {
+	if (((list_c *)symbol->il_operand_list)->size() == 0) {
 		/* if the list becomes empty, then that means that it did not exist before we made these changes, so we delete it! */
 		delete 	symbol->il_operand_list;
 		symbol->il_operand_list = NULL;

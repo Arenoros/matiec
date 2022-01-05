@@ -243,7 +243,7 @@ void *search_varfb_instance_type_c::visit(structure_element_declaration_list_c *
   if (NULL == current_field_selector) return NULL; // the source code has a datatype consistency bug that will be caught later!!
 
   /* now search the structure declaration */
-  for(int i = 0; i < symbol->n; i++) {
+  for(int i = 0; i < symbol->size(); i++) {
     symbol->get_element(i)->accept(*this);
   }
 

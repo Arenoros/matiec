@@ -271,7 +271,7 @@ class print_function_parameter_data_types_c: public generate_c_base_and_typeid_c
         /* print out the data type once for every variable! */
         list_c *list = dynamic_cast<list_c *>(var_list);
         if (list == NULL) ERROR;  
-        for (int i=0; i < list->n; i++) {
+        for (int i=0; i < list->size(); i++) {
           s4o.print("__");
           data_type->accept(*this);
         }  
@@ -2455,7 +2455,7 @@ class generate_c_c: public iterator_visitor_c {
       
       pous_incl_s4o.print("#include \"accessor.h\"\n#include \"iec_std_lib.h\"\n\n");
 
-      for(int i = 0; i < symbol->n; i++) {
+      for(int i = 0; i < symbol->size(); i++) {
         symbol->get_element(i)->accept(*this);
       }
 
@@ -2493,7 +2493,7 @@ class generate_c_c: public iterator_visitor_c {
 
     /* helper symbol for data_type_declaration */
     void *visit(type_declaration_list_c *symbol) {
-      for(int i = 0; i < symbol->n; i++) {
+      for(int i = 0; i < symbol->size(); i++) {
         symbol->get_element(i)->accept(generate_c_implicit_typedecl);
         symbol->get_element(i)->accept(generate_c_typedecl);
       }

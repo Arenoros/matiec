@@ -184,7 +184,7 @@ void forced_narrow_candidate_datatypes_c::forced_narrow_il_instruction(symbol_c 
 // SYM_LIST(instruction_list_c)
 void *forced_narrow_candidate_datatypes_c::visit(instruction_list_c *symbol) {
   for(int j = 0; j < 2; j++) {
-    for(int i = symbol->n-1; i >= 0; i--) {
+    for(int i = symbol->size()-1; i >= 0; i--) {
       symbol->get_element(i)->accept(*this);
     }
   }

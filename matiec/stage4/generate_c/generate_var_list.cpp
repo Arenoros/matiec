@@ -32,6 +32,15 @@
 /***********************************************************************/
 /***********************************************************************/
 
+#include <cstddef>
+#include <list>
+
+#include "absyntax/visitor.h"
+#include "absyntax_utils/search_base_type.h"
+#include "absyntax_utils/search_fb_typedecl.h"
+#include "absyntax_utils/spec_init_separator.h"
+#include "stage4/stage4.h"
+
 class search_location_type_c: public iterator_visitor_c {
 
   public:
@@ -288,7 +297,7 @@ class generate_var_list_c: protected generate_c_base_and_typeid_c {
       /* should NEVER EVER occur!! */
       if (list == NULL) ERROR;
 
-      for(int i = 0; i < list->n; i++) {
+      for(int i = 0; i < list->size(); i++) {
         declare_variable(list->get_element(i));
       }
     }
@@ -792,7 +801,7 @@ class generate_var_list_c: protected generate_c_base_and_typeid_c {
     }
 
     void *visit(structure_element_declaration_list_c *symbol) {
-      for(int i = 0; i < symbol->n; i++) {
+      for(int i = 0; i < symbol->size(); i++) {
         symbol->get_element(i)->accept(*this);
       }
       return NULL;
@@ -859,7 +868,7 @@ class generate_var_list_c: protected generate_c_base_and_typeid_c {
       step_number = 0;
       transition_number = 0;
       action_number = 0;
-      for(int i = 0; i < symbol->n; i++) {
+      for(int i = 0; i < symbol->size(); i++) {
         symbol->get_element(i)->accept(*this);
       }
       return NULL;
@@ -936,7 +945,7 @@ class generate_var_list_c: protected generate_c_base_and_typeid_c {
     /* | step_name_list ',' step_name */
     //SYM_LIST(step_name_list_c)
     void *visit(step_name_list_c *symbol) {
-      for(int i = 0; i < symbol->n; i++) {
+      for(int i = 0; i < symbol->size(); i++) {
         symbol->get_element(i)->accept(*this);
         if (i < symbol->n - 1)
           s4o.print(",");

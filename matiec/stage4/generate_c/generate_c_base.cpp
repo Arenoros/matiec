@@ -204,7 +204,7 @@ class generate_c_base_c: public iterator_visitor_c {
         list->get_element(0)->accept(*visitor);
       }
 
-      for(int i = 1; i < list->n; i++) {
+      for(int i = 1; i < list->size(); i++) {
 //std::cout << "generate_c_base_c::print_list   " << i << "\n";
         s4o.print(inter_elem_str);
         list->get_element(i)->accept(*visitor);

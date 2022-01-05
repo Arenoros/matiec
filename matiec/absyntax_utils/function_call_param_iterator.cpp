@@ -47,7 +47,6 @@
 
 
 #include "function_call_param_iterator.h"
-#include <strings.h>
 #include "main.h" // required for ERROR() and ERROR_MSG() macros.
 
 
@@ -66,7 +65,7 @@
 void *function_call_param_iterator_c::search_list(list_c *list) {
   switch (current_operation) {
     case iterate_nf_op:
-      for(int i = 0; i < list->n; i++) {
+      for(int i = 0; i < list->size(); i++) {
         void *res = list->get_element(i)->accept(*this);
         if (NULL != res) {
           /* It went through the handle_parameter_assignment() function,
@@ -85,7 +84,7 @@ void *function_call_param_iterator_c::search_list(list_c *list) {
       break;
 
     case iterate_f_op:
-      for(int i = 0; i < list->n; i++) {
+      for(int i = 0; i < list->size(); i++) {
         void *res = list->get_element(i)->accept(*this);
         if (NULL != res) {
           /* It went through the handle_parameter_assignment() function,
@@ -104,7 +103,7 @@ void *function_call_param_iterator_c::search_list(list_c *list) {
       break;
 
     case search_f_op:
-      for(int i = 0; i < list->n; i++) {
+      for(int i = 0; i < list->size(); i++) {
         void *res = list->get_element(i)->accept(*this);
         if (res != NULL)
           return res;

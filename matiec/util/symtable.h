@@ -132,6 +132,6 @@ template<typename value_type> class symtable_c {
 
 
 /* Templates must include the source into the code! */
-#include "symtable.cc"
+#include "symtable.hpp"
 
 #endif /*  _SYMTABLE_HH */

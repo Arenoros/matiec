@@ -34,8 +34,8 @@
 #define _STAGE3_HH
 
 #include "util/symtable.h"
+#include "parser.h"
 
-
-int stage3(symbol_c *tree_root, symbol_c **ordered_tree_root);
+int stage3(parser_t* parser);
 
 #endif /* _STAGE3_HH */

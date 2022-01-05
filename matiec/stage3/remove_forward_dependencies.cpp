@@ -208,7 +208,7 @@ void remove_forward_dependencies_c::print_circ_error(library_c *symbol) {
   /* Note that we only print Functions and FBs, as Programs and Configurations cannot contain circular references due to syntax rules */
   /* Note too that circular references in derived datatypes is also not possible due to sytax!                                        */
   int initial_error_count = error_count;
-  for (int i = 0; i < symbol->n; i++) 
+  for (int i = 0; i < symbol->size(); i++) 
     if (   (inserted_symbols.find(symbol->get_element(i)) == inserted_symbols.end())            // if not copied to new AST
         &&(  (NULL != dynamic_cast <function_block_declaration_c *>(symbol->get_element(i)))    // and (is a FB  
            ||(NULL != dynamic_cast <      function_declaration_c *>(symbol->get_element(i)))))  //      or a Function)
@@ -227,7 +227,7 @@ void *remove_forward_dependencies_c::visit(library_c *symbol) {
   
   /* first insert all the derived datatype declarations, in the same order by which they are delcared in the original AST */
   /* Since IEC 61131-3 does not allow FBs in arrays or structures, it is actually safe to place all the datatypes before all the POUs! */
-  for (int i = 0; i < symbol->n; i++) 
+  for (int i = 0; i < symbol->size(); i++) 
     if (NULL != dynamic_cast <data_type_declaration_c *>(symbol->get_element(i)))
       new_tree->add_element(symbol->get_element(i));  
 
@@ -239,10 +239,10 @@ void *remove_forward_dependencies_c::visit(library_c *symbol) {
   cycle_count = 0;
   do {
     cycle_count++;
-    prev_n = new_tree->n;
+    prev_n = new_tree->size();
     current_code_generation_pragma = default_code_generation_pragma;
-    for (int i = 0; i < symbol->n; i++)  symbol->get_element(i)->accept(*this);
-  } while (prev_n != new_tree->n); // repeat while new elementns are still being added to the new AST
+    for (int i = 0; i < symbol->size(); i++)  symbol->get_element(i)->accept(*this);
+  } while (prev_n != new_tree->size()); // repeat while new elementns are still being added to the new AST
   
   if (old_tree_pou_count != pou_count_c::get_count(new_tree)) 
     print_circ_error(symbol);

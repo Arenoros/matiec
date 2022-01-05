@@ -57,9 +57,6 @@ typedef struct {
 	bool relaxed_datatype_model;   /* Use the relaxed datatype equivalence model, instead of the default strict equivalence model */
 } runtime_options_t;
 
-extern runtime_options_t runtime_options;
-
-
 
 
 
@@ -159,6 +156,26 @@ extern void error_exit(const char *file_name, int line_no, const char *errmsg = 
 #define __STDC_FORMAT_MACROS
 #endif
 #include <inttypes.h>
+
+
+#ifdef _MSC_VER
+// not #if defined(_WIN32) || defined(_WIN64) because we have strncasecmp in mingw
+#    define strncasecmp _strnicmp
+#    define strcasecmp _stricmp
+#endif
+
+
+/*
+ * Join two strings together. Allocate space with malloc(3).
+ */
+char* strdup2(const char* a, const char* b);
+
+/*
+ * Join three strings together. Allocate space with malloc(3).
+ */
+char* strdup3(const char* a, const char* b, const char* c);
+
+char* creat_strcopy(const char* str);
 
 
 #endif // #ifndef _MAIN_HH

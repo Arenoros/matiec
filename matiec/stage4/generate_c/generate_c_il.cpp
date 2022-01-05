@@ -48,6 +48,7 @@
 /***********************************************************************/
 
 
+#include "absyntax/absyntax.h"
 /* A new class to ouput the IL implicit variable to c++ code
  * We use this class, inheriting from symbol_c, so it may be used
  * as any other symbol_c object in the intermediate parse tree,
@@ -656,7 +657,7 @@ void *visit(array_variable_c *symbol) {
 /* subscript_list ',' subscript */
 void *visit(subscript_list_c *symbol) {
   array_dimension_iterator_c* array_dimension_iterator = new array_dimension_iterator_c(current_array_type);
-  for (int i =  0; i < symbol->n; i++) {
+  for (int i =  0; i < symbol->size(); i++) {
     symbol_c* dimension = array_dimension_iterator->next();
     if (dimension == NULL) ERROR;
 
@@ -710,7 +711,7 @@ void *visit(instruction_list_c *symbol) {
   /* Declare the backup to the IL implicit variable, that will store the result of the IL operations executed inside a parenthesis... */
   declare_implicit_variable_back();
   
-  for(int i = 0; i < symbol->n; i++) {
+  for(int i = 0; i < symbol->size(); i++) {
     print_line_directive(symbol->get_element(i));
     s4o.print(s4o.indent_spaces);
     symbol->get_element(i)->accept(*this);

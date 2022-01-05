@@ -51,7 +51,6 @@
 #include "spec_init_separator.h"  /* no longer required, aready included by absyntax_utils.hh */
 #include <stdlib.h>  /* required for strtol() */
 #include <string.h>
-#include <strings.h>
 #include <limits> // required for std::numeric_limits< XXX >::max()
 #include <errno.h> // required for errno
 #include "main.h" // required for ERROR() and ERROR_MSG() macros.
@@ -166,15 +165,15 @@ int function_param_iterator_c::cmp_extparam_names(const char* s1, const char* s2
 void* function_param_iterator_c::handle_param_list(list_c *list) {
   switch (current_operation) {
     case iterate_op:
-      if (next_param <= param_count + list->n)
+      if (next_param <= param_count + list->size())
         return list->get_element(next_param - param_count - 1);
 
       /* the desired param is not on this list... */
-      param_count += list->n;
+      param_count += list->size();
       break;
 
     case search_op:
-      for(int i = 0; i < list->n; i++) {
+      for(int i = 0; i < list->size(); i++) {
         symbol_c *sym = list->get_element(i);
         extensible_input_parameter_c *extensible_parameter = dynamic_cast<extensible_input_parameter_c *>(sym);
         if (extensible_parameter != NULL) {
@@ -242,7 +241,7 @@ void* function_param_iterator_c::handle_single_param(symbol_c *var_name) {
 
 void* function_param_iterator_c::iterate_list(list_c *list) {
   void *res;
-  for (int i = 0; i < list->n; i++) {
+  for (int i = 0; i < list->size(); i++) {
     res = list->get_element(i)->accept(*this);
     if (res != NULL)
         return res;

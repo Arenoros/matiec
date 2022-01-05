@@ -5,6 +5,11 @@ VisualStudioVersion = 16.0.32002.261
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "matiec", "matiec\matiec.vcxproj", "{53F7B7F9-597E-422A-9D98-E7528823C277}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0712C852-BBA8-4283-B249-BAF495572146}"
+	ProjectSection(SolutionItems) = preProject
+		.clang-format = .clang-format
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64

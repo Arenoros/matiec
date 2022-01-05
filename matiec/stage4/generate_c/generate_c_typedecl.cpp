@@ -178,7 +178,7 @@ class generate_datatypes_aliasid_c: fcall_visitor_c {
     /* helper symbol for array_specification */
     /* array_subrange_list ',' subrange */
     void *visit(array_subrange_list_c *symbol) {
-      for(int i = 0; i < symbol->n; i++) {symbol->get_element(i)->accept(*this);}
+      for(int i = 0; i < symbol->size(); i++) {symbol->get_element(i)->accept(*this);}
       return NULL;
     }
 
@@ -298,7 +298,7 @@ class generate_c_typedecl_c: public generate_c_base_and_typeid_c {
         list->get_element(0)->accept(*this);
       }
 
-      for(int i = 1; i < list->n; i++) {
+      for(int i = 1; i < list->size(); i++) {
         s4o_incl.print(inter_elem_str);
         list->get_element(i)->accept(*this);
       }

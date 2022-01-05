@@ -64,6 +64,12 @@
     <Filter Include="Source Files\absyntax">
       <UniqueIdentifier>{625dc6d7-bbb5-4316-9ede-a97e21005f3b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\utils">
+      <UniqueIdentifier>{fd63070e-2880-4a68-a2bc-3eea2c206ec9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\utils">
+      <UniqueIdentifier>{fbc5012c-874b-4c34-83e8-1fedb7502957}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stage1_2\create_enumtype_conversion_functions.cpp">
@@ -225,6 +231,18 @@
     <ClCompile Include="absyntax\visitor.cpp">
       <Filter>Source Files\absyntax</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stage1_2\iec_bison.tab.cpp">
+      <Filter>Source Files\stage1_2</Filter>
+    </ClCompile>
+    <ClCompile Include="stage1_2\iec_flex.flex.cpp">
+      <Filter>Source Files\stage1_2</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stage1_2\create_enumtype_conversion_functions.h">
@@ -356,16 +374,47 @@
     <ClInclude Include="absyntax\visitor.h">
       <Filter>Header Files\absyntax</Filter>
     </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\dsymtable.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="util\strdup.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="util\symtable.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="stage1_2\iec_bison.tab.h">
+      <Filter>Header Files\stage1_2</Filter>
+    </ClInclude>
+    <ClInclude Include="stage1_2\iec_flex.h">
+      <Filter>Header Files\stage1_2</Filter>
+    </ClInclude>
+    <ClInclude Include="util\dsymtable.hpp">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="util\symtable.hpp">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="stage1_2\iec_flex.ll">
-      <Filter>Resource Files\stage1_2</Filter>
-    </None>
-    <None Include="stage1_2\iec_bison.yy">
-      <Filter>Resource Files\stage1_2</Filter>
-    </None>
     <None Include="absyntax\absyntax.def">
       <Filter>Header Files\absyntax</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Bison Include="stage1_2\iec_bison.yy">
+      <Filter>Resource Files\stage1_2</Filter>
+    </Bison>
+  </ItemGroup>
+  <ItemGroup>
+    <Flex Include="stage1_2\iec_flex.ll">
+      <Filter>Resource Files\stage1_2</Filter>
+    </Flex>
   </ItemGroup>
 </Project>

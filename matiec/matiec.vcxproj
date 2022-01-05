@@ -41,7 +41,11 @@
     <ClCompile Include="absyntax_utils\search_var_instance_decl.cpp" />
     <ClCompile Include="absyntax_utils\spec_init_separator.cpp" />
     <ClCompile Include="absyntax_utils\type_initial_value.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="parser.cpp" />
     <ClCompile Include="stage1_2\create_enumtype_conversion_functions.cpp" />
+    <ClCompile Include="stage1_2\iec_bison.tab.cpp" />
+    <ClCompile Include="stage1_2\iec_flex.flex.cpp" />
     <ClCompile Include="stage1_2\stage1_2.cpp" />
     <ClCompile Include="stage1_2\standard_function_names.c" />
     <ClCompile Include="stage3\array_range_check.cpp" />
@@ -58,20 +62,50 @@
     <ClCompile Include="stage3\print_datatypes_error.cpp" />
     <ClCompile Include="stage3\remove_forward_dependencies.cpp" />
     <ClCompile Include="stage3\stage3.cpp" />
-    <ClCompile Include="stage4\generate_c\generate_c.cpp" />
-    <ClCompile Include="stage4\generate_c\generate_c_base.cpp" />
-    <ClCompile Include="stage4\generate_c\generate_c_configbody.cpp" />
-    <ClCompile Include="stage4\generate_c\generate_c_il.cpp" />
-    <ClCompile Include="stage4\generate_c\generate_c_inlinefcall.cpp" />
-    <ClCompile Include="stage4\generate_c\generate_c_sfc.cpp" />
-    <ClCompile Include="stage4\generate_c\generate_c_sfcdecl.cpp" />
-    <ClCompile Include="stage4\generate_c\generate_c_st.cpp" />
-    <ClCompile Include="stage4\generate_c\generate_c_typedecl.cpp" />
-    <ClCompile Include="stage4\generate_c\generate_c_vardecl.cpp" />
-    <ClCompile Include="stage4\generate_c\generate_location_list.cpp" />
-    <ClCompile Include="stage4\generate_c\generate_var_list.cpp" />
-    <ClCompile Include="stage4\generate_iec\generate_iec.cpp" />
-    <ClCompile Include="stage4\stage4.cpp" />
+    <ClCompile Include="stage4\generate_c\generate_c.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_c_base.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_c_configbody.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_c_il.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_c_inlinefcall.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_c_sfc.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_c_sfcdecl.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_c_st.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_c_typedecl.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_c_vardecl.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_location_list.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_var_list.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="stage4\generate_iec\generate_iec.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="stage4\stage4.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClInclude Include="util\dsymtable.hpp" />
+    <ClInclude Include="util\symtable.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="absyntax\absyntax.h" />
@@ -96,7 +130,11 @@
     <ClInclude Include="absyntax_utils\search_var_instance_decl.h" />
     <ClInclude Include="absyntax_utils\spec_init_separator.h" />
     <ClInclude Include="absyntax_utils\type_initial_value.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="parser.h" />
     <ClInclude Include="stage1_2\create_enumtype_conversion_functions.h" />
+    <ClInclude Include="stage1_2\iec_bison.tab.h" />
+    <ClInclude Include="stage1_2\iec_flex.h" />
     <ClInclude Include="stage1_2\stage1_2.h" />
     <ClInclude Include="stage1_2\stage1_2_priv.h" />
     <ClInclude Include="stage3\array_range_check.h" />
@@ -117,11 +155,18 @@
     <ClInclude Include="stage4\generate_c\plc.h" />
     <ClInclude Include="stage4\generate_c\types.h" />
     <ClInclude Include="stage4\stage4.h" />
+    <ClInclude Include="util\dsymtable.h" />
+    <ClInclude Include="util\strdup.h" />
+    <ClInclude Include="util\symtable.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="absyntax\absyntax.def" />
-    <None Include="stage1_2\iec_bison.yy" />
-    <None Include="stage1_2\iec_flex.ll" />
+    <Bison Include="stage1_2\iec_bison.yy">
+      <FileType>Document</FileType>
+    </Bison>
+    <Flex Include="stage1_2\iec_flex.ll">
+      <FileType>Document</FileType>
+    </Flex>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -221,7 +266,6 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>./</AdditionalIncludeDirectories>

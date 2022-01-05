@@ -84,7 +84,7 @@ class generate_c_sfcdecl_c: protected generate_c_base_and_typeid_c {
       transition_number = 0;
       switch (wanted_sfcdeclaration) {
         case sfcdecl_sd:
-          for(int i = 0; i < symbol->n; i++)
+          for(int i = 0; i < symbol->size(); i++)
             symbol->get_element(i)->accept(*this);
           
           /* steps table declaration */
@@ -119,7 +119,7 @@ class generate_c_sfcdecl_c: protected generate_c_base_and_typeid_c {
           
           /* steps table count */
           wanted_sfcdeclaration = stepcount_sd;
-          for(int i = 0; i < symbol->n; i++)
+          for(int i = 0; i < symbol->size(); i++)
             symbol->get_element(i)->accept(*this);
           s4o.print(s4o.indent_spaces);
           print_variable_prefix();
@@ -140,12 +140,12 @@ class generate_c_sfcdecl_c: protected generate_c_base_and_typeid_c {
           s4o.print("__step_list[i] = temp_step;\n");
           s4o.indent_left();
           s4o.print(s4o.indent_spaces + "}\n");
-          for(int i = 0; i < symbol->n; i++)
+          for(int i = 0; i < symbol->size(); i++)
             symbol->get_element(i)->accept(*this);
           
           /* actions table count */
           wanted_sfcdeclaration = actioncount_sd;
-          for(int i = 0; i < symbol->n; i++)
+          for(int i = 0; i < symbol->size(); i++)
             symbol->get_element(i)->accept(*this);
           s4o.print(s4o.indent_spaces);
           print_variable_prefix();
@@ -169,7 +169,7 @@ class generate_c_sfcdecl_c: protected generate_c_base_and_typeid_c {
           
           /* transitions table count */
           wanted_sfcdeclaration = transitioncount_sd;
-          for(int i = 0; i < symbol->n; i++)
+          for(int i = 0; i < symbol->size(); i++)
             symbol->get_element(i)->accept(*this);
           s4o.print(s4o.indent_spaces);
           print_variable_prefix();
@@ -186,7 +186,7 @@ class generate_c_sfcdecl_c: protected generate_c_base_and_typeid_c {
           break;
         case stepdef_sd:
           s4o.print("// Steps definitions\n");
-          for(int i = 0; i < symbol->n; i++)
+          for(int i = 0; i < symbol->size(); i++)
             symbol->get_element(i)->accept(*this);
           s4o.print("\n");
           break;
@@ -195,12 +195,12 @@ class generate_c_sfcdecl_c: protected generate_c_base_and_typeid_c {
           {
             // first fill up the this->variable_list variable!
             wanted_sfcdeclaration = actioncount_sd;
-            for(int i = 0; i < symbol->n; i++)
+            for(int i = 0; i < symbol->size(); i++)
                symbol->get_element(i)->accept(*this);
             action_number = 0; // reset the counter!
             wanted_sfcdeclaration = actiondef_sd;
             // Now do the defines for actions!
-            for(int i = 0; i < symbol->n; i++)
+            for(int i = 0; i < symbol->size(); i++)
               symbol->get_element(i)->accept(*this);
             // Now do the defines for actions that reference a variable instead of an action block!
             std::list<VARIABLE>::iterator pt;
@@ -218,18 +218,18 @@ class generate_c_sfcdecl_c: protected generate_c_base_and_typeid_c {
           break;
         case stepundef_sd:
           s4o.print("// Steps undefinitions\n");
-          for(int i = 0; i < symbol->n; i++)
+          for(int i = 0; i < symbol->size(); i++)
             symbol->get_element(i)->accept(*this);
           s4o.print("\n");
           break;
         case actionundef_sd:
           s4o.print("// Actions undefinitions\n");
-          for(int i = 0; i < symbol->n; i++)
+          for(int i = 0; i < symbol->size(); i++)
             symbol->get_element(i)->accept(*this);
           {
             // first fill up the this->variable_list variable!
             wanted_sfcdeclaration = actioncount_sd;
-            for(int i = 0; i < symbol->n; i++)
+            for(int i = 0; i < symbol->size(); i++)
                symbol->get_element(i)->accept(*this);
             wanted_sfcdeclaration = actionundef_sd;
             std::list<VARIABLE>::iterator pt;

@@ -39,13 +39,10 @@
  *    In this case, we shall first serach for the basetype declaration using search_base_type_c, and then 
  *    run the normal process.
  */
+
 #include "absyntax_utils.h"
 
 #include "main.h" // required for ERROR() and ERROR_MSG() macros.
-
-
-
-
 
 
 class get_datatype_info_c { 

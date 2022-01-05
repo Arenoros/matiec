@@ -49,7 +49,6 @@
 #include <sstream>
 #include <typeinfo>
 #include <list>
-#include <strings.h>
 // #include <string.h>  /* required for strlen() */
 // #include <stdlib.h>  /* required for atoi() */
 // #include <errno.h>   /* required for errno */
@@ -58,8 +57,6 @@
 #include "util/dsymtable.h"
 #include "absyntax/visitor.h"
 #include "main.h" // required for ERROR() and ERROR_MSG() macros.
-
-
 
 //#define DEBUG
 #ifdef DEBUG

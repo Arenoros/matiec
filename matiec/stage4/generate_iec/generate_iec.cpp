@@ -167,7 +167,7 @@ void *print_list(list_c *list,
     list->get_element(0)->accept(*this);
   }
 
-  for(int i = 1; i < list->n; i++) {
+  for(int i = 1; i < list->size(); i++) {
     s4o.print(inter_elem_str);
     list->get_element(i)->accept(*this);
   }
