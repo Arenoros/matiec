@@ -1,0 +1,14 @@
+[requires]
+#llvm-core/13.0.0
+#gtest/1.11.0
+#boost/1.71.0@mps/beta
+
+
+[options]
+boost:without_filesystem=False
+boost:without_system=False
+boost:shared=True
+
+
+[build_requires]
+winflexbison/2.5.24
