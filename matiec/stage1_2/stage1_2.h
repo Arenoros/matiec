@@ -41,6 +41,8 @@
 #define _STAGE1_2_HH
 
 
+#include "stage1_2/iec_bison.tab.h"
+#include "stage1_2/iec_flex.h"
 
 /* This file includes the interface through which the main function accesses the stage1_2 services */
 

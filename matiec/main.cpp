@@ -78,8 +78,6 @@
 #include "stage4/stage4.h"
 #include "main.h"
 
-#include "stage1_2/iec_bison.tab.h"
-#include "stage1_2/iec_flex.h"
 
 #ifndef HGVERSION
 #    define HGVERSION ""
@@ -137,7 +135,7 @@ int main(int argc, char** argv) {
     yyscan_t scanner;
     yylex_init(&scanner);
     FILE* fin = nullptr;
-    auto err = fopen_s(&fin, "test2.txt", "r");
+    auto err = fopen_s(&fin, "test1.txt", "r");
     if (err) {
         char errmsg[255] = {0};
         strerror_s(errmsg, 254, err);
@@ -166,8 +164,8 @@ int main(int argc, char** argv) {
         return EXIT_FAILURE;
 
     /* 3rd Pass */
-   /* if (stage4(parser.ordered_root, "output") < 0)
-        return EXIT_FAILURE;*/
+    if (stage4(parser.ordered_root, "./") < 0)
+        return EXIT_FAILURE;
 
     /* 4th Pass */
     /* Call gcc, g++, or whatever... */

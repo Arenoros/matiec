@@ -154,7 +154,7 @@ class generate_c_sfc_elements_c: public generate_c_base_and_typeid_c {
     void *visit(initial_step_c *symbol) {
       switch (wanted_sfcgeneration) {
         case actionassociation_sg:
-          if (((list_c*)symbol->action_association_list)->n > 0) {
+          if (((list_c*)symbol->action_association_list)->size() > 0) {
             s4o.print(s4o.indent_spaces + "// ");
             symbol->step_name->accept(*this);
             s4o.print(" action associations\n");
@@ -186,7 +186,7 @@ class generate_c_sfc_elements_c: public generate_c_base_and_typeid_c {
     void *visit(step_c *symbol) {
       switch (wanted_sfcgeneration) {
         case actionassociation_sg:
-          if (((list_c*)symbol->action_association_list)->n > 0) {
+          if (((list_c*)symbol->action_association_list)->size() > 0) {
             s4o.print(s4o.indent_spaces + "// ");
             symbol->step_name->accept(*this);
             s4o.print(" action associations\n");
@@ -445,7 +445,7 @@ class generate_c_sfc_elements_c: public generate_c_base_and_typeid_c {
             s4o.print("(");
             print_step_argument(symbol->get_element(i), "X");
             s4o.print(")");
-            if (i < symbol->n - 1) {
+            if (i < symbol->size() - 1) {
               s4o.print(" && ");
             }
           }

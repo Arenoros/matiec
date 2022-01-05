@@ -30,23 +30,22 @@
  *
  */
 
-
 /* Returns the function block declaration symbol
  * of a specific function block type.
  */
+#pragma once
 
-class search_fb_typedecl_c: public search_visitor_c {
+class search_fb_typedecl_c : public search_visitor_c {
+private:
+    symbol_c* search_scope;
 
-  private:
-    symbol_c *search_scope;
+    symbol_c* search_name;
 
-    symbol_c *search_name;
+public:
+    search_fb_typedecl_c(symbol_c* search_scope);
+    symbol_c* get_decl(symbol_c* fb_type_name);
 
-  public:
-    search_fb_typedecl_c(symbol_c *search_scope);
-    symbol_c *get_decl(symbol_c *fb_type_name);
-
-  private:
+private:
     /**************************************/
     /* B.1.5 - Program organization units */
     /**************************************/
@@ -54,10 +53,10 @@ class search_fb_typedecl_c: public search_visitor_c {
     /*****************************/
     /* B 1.5.2 - Function Blocks */
     /*****************************/
-    void *visit(function_block_declaration_c *symbol);
+    void* visit(function_block_declaration_c* symbol);
 
     /**********************/
     /* B 1.5.3 - Programs */
     /**********************/
-    void *visit(program_declaration_c *symbol);
-}; // search_fb_typedecl_c
+    void* visit(program_declaration_c* symbol);
+};  // search_fb_typedecl_c

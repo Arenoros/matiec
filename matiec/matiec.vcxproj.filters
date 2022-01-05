@@ -70,6 +70,9 @@
     <Filter Include="Source Files\utils">
       <UniqueIdentifier>{fbc5012c-874b-4c34-83e8-1fedb7502957}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\tests">
+      <UniqueIdentifier>{7f79fabb-e1e0-4e2e-8275-9ef0b80af262}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stage1_2\create_enumtype_conversion_functions.cpp">
@@ -416,5 +419,10 @@
     <Flex Include="stage1_2\iec_flex.ll">
       <Filter>Resource Files\stage1_2</Filter>
     </Flex>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="test1.txt">
+      <Filter>Resource Files\tests</Filter>
+    </Text>
   </ItemGroup>
 </Project>

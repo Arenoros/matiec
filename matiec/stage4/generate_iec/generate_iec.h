@@ -55,7 +55,7 @@
 
 
 #include <string>
-#include "../absyntax/visitor.h"
+#include "absyntax/visitor.h"
 
 
 

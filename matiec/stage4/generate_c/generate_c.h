@@ -50,8 +50,8 @@
 
 
 #include <string>
-#include "../absyntax/absyntax.h"
-#include "../absyntax/visitor.h"
+#include "absyntax/absyntax.h"
+#include "absyntax/visitor.h"
 
 
 

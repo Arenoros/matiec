@@ -62,9 +62,7 @@
     <ClCompile Include="stage3\print_datatypes_error.cpp" />
     <ClCompile Include="stage3\remove_forward_dependencies.cpp" />
     <ClCompile Include="stage3\stage3.cpp" />
-    <ClCompile Include="stage4\generate_c\generate_c.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="stage4\generate_c\generate_c.cpp" />
     <ClCompile Include="stage4\generate_c\generate_c_base.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -101,9 +99,7 @@
     <ClCompile Include="stage4\generate_iec\generate_iec.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="stage4\stage4.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="stage4\stage4.cpp" />
     <ClInclude Include="util\dsymtable.hpp" />
     <ClInclude Include="util\symtable.hpp" />
   </ItemGroup>
@@ -167,6 +163,9 @@
     <Flex Include="stage1_2\iec_flex.ll">
       <FileType>Document</FileType>
     </Flex>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="test1.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
