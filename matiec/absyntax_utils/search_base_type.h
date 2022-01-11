@@ -71,11 +71,12 @@ private:
     static search_base_type_c* search_base_type_singleton;  // Make this a singleton class!
 
 private:
-    static void create_singleton(void);
+    static void create_singleton(symtable_t* glob_sym_table = nullptr);
     void* handle_datatype_identifier(token_c* type_name);
+    symtable_t* glob_sym_table;
 
 public:
-    search_base_type_c(void);
+    search_base_type_c(symtable_t* glob_sym_table);
     static symbol_c* get_equivtype_decl(symbol_c* symbol); /* get the Equivalent Type declaration */
     static symbol_c* get_basetype_decl(symbol_c* symbol);  /* get the Base       Type declaration */
     static symbol_c* get_basetype_id(symbol_c* symbol);    /* get the Base       Type identifier  */

@@ -73,6 +73,12 @@
     <Filter Include="Resource Files\tests">
       <UniqueIdentifier>{7f79fabb-e1e0-4e2e-8275-9ef0b80af262}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\stage4\generate_llvm">
+      <UniqueIdentifier>{9e0f82f1-de83-4bf9-8c16-e10a886799b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\stage4\generate_llvm">
+      <UniqueIdentifier>{9502a227-e06e-4fca-a608-072d2f2cdc11}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stage1_2\create_enumtype_conversion_functions.cpp">
@@ -246,6 +252,9 @@
     <ClCompile Include="stage1_2\iec_flex.flex.cpp">
       <Filter>Source Files\stage1_2</Filter>
     </ClCompile>
+    <ClCompile Include="stage4\generate_llvm\generate_llvm.cpp">
+      <Filter>Source Files\stage4\generate_llvm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stage1_2\create_enumtype_conversion_functions.h">
@@ -404,6 +413,9 @@
     <ClInclude Include="util\symtable.hpp">
       <Filter>Header Files\utils</Filter>
     </ClInclude>
+    <ClInclude Include="stage4\generate_llvm\generate_llvm.h">
+      <Filter>Header Files\stage4\generate_llvm</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="absyntax\absyntax.def">
@@ -423,6 +435,12 @@
   <ItemGroup>
     <Text Include="test1.txt">
       <Filter>Resource Files\tests</Filter>
+    </Text>
+    <Text Include="types.txt">
+      <Filter>Resource Files\tests</Filter>
+    </Text>
+    <Text Include="conanfile.txt">
+      <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
 </Project>

@@ -36,14 +36,13 @@
 
 #include "absyntax_utils.h"
 
-
-search_fb_typedecl_c::search_fb_typedecl_c(symbol_c *search_scope) {
-  this->search_scope = search_scope;
+search_fb_typedecl_c::search_fb_typedecl_c(symbol_c* search_scope) {
+    this->search_scope = search_scope;
 }
 
-symbol_c *search_fb_typedecl_c::get_decl(symbol_c *fb_type_name) {
-  this->search_name = fb_type_name;
-  return (symbol_c *)search_scope->accept(*this);
+symbol_c* search_fb_typedecl_c::get_decl(symbol_c* fb_type_name) {
+    this->search_name = fb_type_name;
+    return (symbol_c*)search_scope->accept(*this);
 }
 /**************************************/
 /* B.1.5 - Program organization units */
@@ -52,18 +51,17 @@ symbol_c *search_fb_typedecl_c::get_decl(symbol_c *fb_type_name) {
 /*****************************/
 /* B 1.5.2 - Function Blocks */
 /*****************************/
-void *search_fb_typedecl_c::visit(function_block_declaration_c *symbol) {
-  if (compare_identifiers(symbol->fblock_name, search_name) == 0)
-    return symbol;
-  return NULL;
+void* search_fb_typedecl_c::visit(function_block_declaration_c* symbol) {
+    if (compare_identifiers(symbol->fblock_name, search_name) == 0)
+        return symbol;
+    return NULL;
 }
 
 /**********************/
 /* B 1.5.3 - Programs */
 /**********************/
-void *search_fb_typedecl_c::visit(program_declaration_c *symbol) {
-  if (compare_identifiers(symbol->program_type_name, search_name) == 0)
-    return symbol;
-  return NULL;
+void* search_fb_typedecl_c::visit(program_declaration_c* symbol) {
+    if (compare_identifiers(symbol->program_type_name, search_name) == 0)
+        return symbol;
+    return NULL;
 }
-

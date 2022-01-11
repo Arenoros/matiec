@@ -51,21 +51,17 @@
 #include "absyntax/visitor.h"
 
 
-
-/* returns 0 if the names are equal!! Case is ignored. */
-int compare_identifiers(symbol_c *ident1, symbol_c *ident2);
-
 /* A symbol table with all globally declared functions... */
-typedef dsymtable_c<function_declaration_c *> function_symtable_t;
+typedef dsymtable_c<function_declaration_c*> function_symtable_t;
 extern function_symtable_t function_symtable;
 
 /* A symbol table with all globally declared functions block types... */
-typedef symtable_c<function_block_declaration_c *> function_block_type_symtable_t;
-extern  function_block_type_symtable_t function_block_type_symtable;
+typedef symtable_c<function_block_declaration_c*> function_block_type_symtable_t;
+extern function_block_type_symtable_t function_block_type_symtable;
 
 /* A symbol table with all globally declared program types... */
-typedef symtable_c<program_declaration_c *> program_type_symtable_t;
-extern  program_type_symtable_t program_type_symtable;
+typedef symtable_c<program_declaration_c*> program_type_symtable_t;
+extern program_type_symtable_t program_type_symtable;
 
 /* A symbol table with all user declared type definitions... */
 /* Note that function block types and program types have their
@@ -73,8 +69,31 @@ extern  program_type_symtable_t program_type_symtable;
  *
  * The symbol_c * associated to the value will point to the data type declaration.
  */
-typedef symtable_c<symbol_c *> type_symtable_t;
-extern  type_symtable_t type_symtable;
+typedef symtable_c<symbol_c*> type_symtable_t;
+extern type_symtable_t type_symtable;
+
+
+/* returns 0 if the names are equal!! Case is ignored. */
+int compare_identifiers(symbol_c *ident1, symbol_c *ident2);
+
+struct symtable_t {
+    /* A symbol table with all globally declared functions... */
+    dsymtable_c<function_declaration_c*> functions;
+
+    /* A symbol table with all globally declared functions block types... */
+    symtable_c<function_block_declaration_c*> function_blocks;
+
+    /* A symbol table with all globally declared program types... */
+    symtable_c<program_declaration_c*> programe;
+
+    /* A symbol table with all user declared type definitions... */
+    /* Note that function block types and program types have their
+     * own symbol tables, so do not get placed in this symbol table!
+     *
+     * The symbol_c * associated to the value will point to the data type declaration.
+     */
+    symtable_c<symbol_c*> types;
+};
 
 
 /***********************************************************************/

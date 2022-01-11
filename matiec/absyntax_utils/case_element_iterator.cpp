@@ -30,7 +30,6 @@
  *
  */
 
-
 /*
  * Case element iterator.
  * Iterate through the elements of a case list.
@@ -45,68 +44,58 @@
  * the good type...case_element_iterator_c
  */
 
-
-
-
 #include "case_element_iterator.h"
-#include "main.h" // required for ERROR() and ERROR_MSG() macros.
-
+#include "main.h"  // required for ERROR() and ERROR_MSG() macros.
 
 //#define DEBUG
 #ifdef DEBUG
-#define TRACE(classname) printf("\n____%s____\n",classname);
+#    define TRACE(classname) printf("\n____%s____\n", classname);
 #else
-#define TRACE(classname)
+#    define TRACE(classname)
 #endif
 
+void* case_element_iterator_c::handle_case_element(symbol_c* case_element) {
+    if (current_case_element == case_element) {
+        current_case_element = NULL;
+    } else if (current_case_element == NULL) {
+        current_case_element = case_element;
+        return case_element;
+    }
 
-
-
-void* case_element_iterator_c::handle_case_element(symbol_c *case_element) {
-  if (current_case_element == case_element) {
-    current_case_element = NULL;
-  }
-  else if (current_case_element == NULL) {
-	current_case_element = case_element;
-	return case_element;
-  }
-
-  /* Not found! */
-  return NULL;
+    /* Not found! */
+    return NULL;
 }
 
-void* case_element_iterator_c::iterate_list(list_c *list) {
-  void *res;
-  for (int i = 0; i < list->size(); i++) {
-    res = list->get_element(i)->accept(*this);
-    if (res != NULL)
-        return res;
-  }
-  return NULL;
+void* case_element_iterator_c::iterate_list(list_c* list) {
+    void* res;
+    for (int i = 0; i < list->size(); i++) {
+        res = list->get_element(i)->accept(*this);
+        if (res != NULL)
+            return res;
+    }
+    return NULL;
 }
 
 /* start off at the first case element once again... */
 void case_element_iterator_c::reset(void) {
-  current_case_element = NULL;
+    current_case_element = NULL;
 }
-
 
 /* initialize the iterator object.
  * We must be given a reference to a case_list_c that will be analyzed...
  */
-case_element_iterator_c::case_element_iterator_c(symbol_c *list, case_element_t element_type) {
-  /* do some consistency check... */
-  case_list_c* case_list = dynamic_cast<case_list_c*>(list);
+case_element_iterator_c::case_element_iterator_c(symbol_c* list, case_element_t element_type) {
+    /* do some consistency check... */
+    case_list_c* case_list = dynamic_cast<case_list_c*>(list);
 
-  if (NULL == case_list) ERROR;
+    if (NULL == case_list)
+        ERROR;
 
-  /* OK. Now initialize this object... */
-  this->case_list = list;
-  this->wanted_element_type = element_type;
-  reset();
+    /* OK. Now initialize this object... */
+    this->case_list = list;
+    this->wanted_element_type = element_type;
+    reset();
 }
-
-
 
 /* Skip to the next case element of type chosen. After object creation,
  * the object references on case element _before_ the first, so
@@ -115,70 +104,69 @@ case_element_iterator_c::case_element_iterator_c(symbol_c *list, case_element_t 
  *
  * Returns the case element's symbol!
  */
-symbol_c *case_element_iterator_c::next(void) {
-  void *res = case_list->accept(*this);
-  if (res == NULL) 
-    return NULL;
+symbol_c* case_element_iterator_c::next(void) {
+    void* res = case_list->accept(*this);
+    if (res == NULL)
+        return NULL;
 
-  return current_case_element;
+    return current_case_element;
 }
 
 /******************************/
 /* B 1.2.1 - Numeric Literals */
 /******************************/
-void *case_element_iterator_c::visit(integer_c *symbol) {
-  switch (wanted_element_type) {
-	case element_single:
-	  return handle_case_element(symbol);
-	  break;
-	default:
-	  break;
-  }
-  return NULL;
+void* case_element_iterator_c::visit(integer_c* symbol) {
+    switch (wanted_element_type) {
+    case element_single:
+        return handle_case_element(symbol);
+        break;
+    default:
+        break;
+    }
+    return NULL;
 }
 
-void *case_element_iterator_c::visit(neg_integer_c *symbol) {
-  switch (wanted_element_type) {
-	case element_single:
-	  return handle_case_element(symbol);
-	  break;
-	default:
-	  break;
-  }
-  return NULL;
+void* case_element_iterator_c::visit(neg_integer_c* symbol) {
+    switch (wanted_element_type) {
+    case element_single:
+        return handle_case_element(symbol);
+        break;
+    default:
+        break;
+    }
+    return NULL;
 }
 
 /********************************/
 /* B 1.3.3 - Derived data types */
 /********************************/
 /*  signed_integer DOTDOT signed_integer */
-void *case_element_iterator_c::visit(subrange_c *symbol) {
-  switch (wanted_element_type) {
+void* case_element_iterator_c::visit(subrange_c* symbol) {
+    switch (wanted_element_type) {
     case element_subrange:
-      return handle_case_element(symbol);
-      break;
+        return handle_case_element(symbol);
+        break;
     default:
-      break;
-  }
-  return NULL;
+        break;
+    }
+    return NULL;
 }
 
 /* enumerated_type_name '#' identifier */
-void *case_element_iterator_c::visit(enumerated_value_c *symbol) {
-  switch (wanted_element_type) {
+void* case_element_iterator_c::visit(enumerated_value_c* symbol) {
+    switch (wanted_element_type) {
     case element_single:
-      return handle_case_element(symbol);
-      break;
+        return handle_case_element(symbol);
+        break;
     default:
-      break;
-  }
-  return NULL;
+        break;
+    }
+    return NULL;
 }
 
 /********************************/
 /* B 3.2.3 Selection Statements */
 /********************************/
-void *case_element_iterator_c::visit(case_list_c *symbol) {
-  return iterate_list(symbol);
+void* case_element_iterator_c::visit(case_list_c* symbol) {
+    return iterate_list(symbol);
 }
-

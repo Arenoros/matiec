@@ -756,11 +756,11 @@ public:
     /********************/
     /* 2.1.6 - Pragmas  */
     /********************/
-    void* visit(enable_code_generation_pragma_c* symbol) {
+    void* visit(enable_code_generation_pragma_c* symbol) override {
         s4o_ptr->enable_output();
         return NULL;
     }
-    void* visit(disable_code_generation_pragma_c* symbol) {
+    void* visit(disable_code_generation_pragma_c* symbol) override {
         s4o_ptr->disable_output();
         return NULL;
     }
@@ -769,7 +769,7 @@ public:
     /* B.1.6  Sequential function chart elements */
     /*********************************************/
     /*| sequential_function_chart sfc_network*/
-    void* visit(sequential_function_chart_c* symbol);
+    void* visit(sequential_function_chart_c* symbol) override;
 
     /****************************************/
     /* B.2 - Language IL (Instruction List) */
@@ -779,7 +779,7 @@ public:
     /* B 2.1 Instructions and Operands */
     /***********************************/
     /*| instruction_list il_instruction */
-    void* visit(instruction_list_c* symbol);
+    void* visit(instruction_list_c* symbol) override;
 
     /* Remainder implemented in generate_c_il_c... */
 
@@ -794,7 +794,7 @@ public:
     /********************/
     /* B 3.2 Statements */
     /********************/
-    void* visit(statement_list_c* symbol);
+    void* visit(statement_list_c* symbol) override;
 
     /* Remainder implemented in generate_c_st_c... */
 };

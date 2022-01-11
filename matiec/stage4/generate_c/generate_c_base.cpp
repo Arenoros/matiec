@@ -264,7 +264,7 @@ public:
         // Determine whether this function has the EN parameter
         //    (we just check the base LE, GT, .. function, as it should have
         //     the same parameters as the overloaded function!)
-        function_symtable_t::iterator lower = function_symtable.lower_bound(function);
+        auto lower = function_symtable.lower_bound(function);
         if (lower == function_symtable.end())
             ERROR;  // We want to call a function that does not exist!!?? Hmm...
         search_var_instance_decl_c search_var(function_symtable.get_value(lower));

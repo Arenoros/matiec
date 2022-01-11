@@ -77,7 +77,7 @@
 #include "stage3/stage3.h"
 #include "stage4/stage4.h"
 #include "main.h"
-
+#include "stage4/generate_llvm/generate_llvm.h"
 
 #ifndef HGVERSION
 #    define HGVERSION ""
@@ -100,37 +100,6 @@ void error_exit(const char* file_name, int line_no, const char* errmsg, ...) {
     exit(EXIT_FAILURE);
 }
 
-static void printusage(const char* cmd) {
-    printf(
-        "\nsyntax: %s [<options>] [-O <output_options>] [-I <include_directory>] [-T <target_directory>] "
-        "<input_file>\n",
-        cmd);
-    printf(" -h : show this help message\n");
-    printf(" -v : print version number\n");
-    printf(" -f : display full token location on error messages\n");
-    printf(" -p : allow use of forward references                (a non-standard extension?)\n");
-    printf(" -l : use a relaxed datatype equivalence model       (a non-standard extension?)\n");
-    printf(
-        " -s : allow use of safe datatypes (SAFEBOOL, etc.)   (defined in PLCOpen Safety)\n");  // PLCopen TC5 "Safety
-                                                                                                // Software Technical
-                                                                                                // Specification - Part
-                                                                                                // 1" v1.0
-    printf(" -n : allow use of nested comments                   (an IEC 61131-3 v3 feature)\n");
-    printf(" -r : allow use of references (REF_TO, REF, ^, NULL) (an IEC 61131-3 v3 feature)\n");
-    printf(" -R : allow use of REF_TO ANY datatypes              (a non-standard extension!)\n");
-    printf("        as well as REF_TO in ARRAYs and STRUCTs      (a non-standard extension!)\n");
-    printf(" -a : allow use of non-literals in array size limits (a non-standard extension!)\n");
-    printf(" -i : allow POUs with no in out and inout parameters (a non-standard extension!)\n");
-    printf(" -b : allow functions returning VOID                 (a non-standard extension!)\n");
-    printf(" -e : disable generation of implicit EN and ENO parameters.\n");
-    printf(" -c : create conversion functions for enumerated data types\n");
-    printf(" -O : options for output (code generation) stage. Available options for %s are...\n", cmd);
-    // runtime_options.allow_missing_var_in =
-    //     false; /* disable: allow definition and invocation of POUs with no input, output and in_out parameters! */
-    stage4_print_options();
-    printf("\n");
-}
-
 int main(int argc, char** argv) {
     yyscan_t scanner;
     yylex_init(&scanner);
@@ -149,9 +118,14 @@ int main(int argc, char** argv) {
     /***************************/
     /* 1st Pass */
     parser_t parser;
+    parser.runtime_options.allow_void_datatype = true;
+    parser.reg_c_func("c_func");
     int rv = yyparse(scanner, &parser);
     if (rv < 0)
         return EXIT_FAILURE;
+
+    generate_llvm_code test;
+    parser.tree_root->accept(test);
 
     /* 2nd Pass */
     /* basically loads some symbol tables to speed up look ups later on */

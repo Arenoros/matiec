@@ -90,12 +90,12 @@ static int constant_propagation(symbol_c* tree_root) {
  * has already been completed, so be sure to call those semantic checkers
  * before calling this function
  */
-static int type_safety(symbol_c* tree_root) {
+static int type_safety(symbol_c* tree_root, symtable_t* ctx) {
     fill_candidate_datatypes_c fill_candidate_datatypes(tree_root);
     tree_root->accept(fill_candidate_datatypes);
     narrow_candidate_datatypes_c narrow_candidate_datatypes(tree_root);
     tree_root->accept(narrow_candidate_datatypes);
-    print_datatypes_error_c print_datatypes_error(tree_root);
+    print_datatypes_error_c print_datatypes_error(tree_root, ctx);
     tree_root->accept(print_datatypes_error);
     forced_narrow_candidate_datatypes_c forced_narrow_candidate_datatypes(tree_root);
     tree_root->accept(forced_narrow_candidate_datatypes);
@@ -157,7 +157,7 @@ int stage3(parser_t* parser) {
     error_count += flow_control_analysis(tree_root);
     error_count += constant_propagation(tree_root);
     error_count += declaration_safety(tree_root);
-    error_count += type_safety(tree_root);
+    error_count += type_safety(tree_root, &parser->context);
     error_count += lvalue_check(tree_root);
     error_count += array_range_check(tree_root);
     error_count += case_elements_check(tree_root);

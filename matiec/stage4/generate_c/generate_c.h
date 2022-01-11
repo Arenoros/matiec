@@ -30,7 +30,6 @@
  *
  */
 
-
 /*
  * This is one of the versions available for the 4th stage.
  *
@@ -38,27 +37,15 @@
  * to the IL, ST and SFC code.
  */
 
-
 /*
  * generate_c.HH
  */
 
-
 #ifndef _generate_c_HH
 #define _generate_c_HH
-
-
 
 #include <string>
 #include "absyntax/absyntax.h"
 #include "absyntax/visitor.h"
 
-
-
-
-
-
-
-
 #endif /*  _generate_c_H */
-

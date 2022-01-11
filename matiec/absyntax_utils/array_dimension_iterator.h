@@ -45,6 +45,7 @@
  * ...array_dimension_iterator_c
  */
 
+#pragma once
 
 #include "absyntax/visitor.h"
 

@@ -689,7 +689,7 @@ VAR				| /* execute the next rule's action, i.e. fall-through! */
 VAR_INPUT			|
 VAR_OUTPUT			|
 VAR_IN_OUT			|
-VAR_EXTERNAL			|
+VAR_EXTERNAL		|
 VAR_GLOBAL			|
 VAR_TEMP			|
 VAR_CONFIG			|
@@ -712,7 +712,7 @@ END_PROGRAM			unput_text(0, yyscanner, parser); BEGIN(vardecl_list_state);
 VAR_INPUT			| /* execute the next rule's action, i.e. fall-through! */
 VAR_OUTPUT			|
 VAR_IN_OUT			|
-VAR_EXTERNAL			|
+VAR_EXTERNAL		|
 VAR_GLOBAL			|
 VAR_TEMP			|
 VAR_CONFIG			|

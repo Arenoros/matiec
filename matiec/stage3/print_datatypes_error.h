@@ -43,7 +43,7 @@
  *  if an datatype error has been found, and if so, print out an error message.
  */
 
-
+#pragma once
 #include "absyntax_utils/absyntax_utils.h"
 #include "datatype_functions.h"
 
@@ -104,9 +104,9 @@ class print_datatypes_error_c: public iterator_visitor_c {
     void *print_binary_operator_errors  (const char *il_operator, symbol_c *symbol,                                     bool deprecated_operation = false);
     void *print_binary_expression_errors(const char *operation  , symbol_c *symbol, symbol_c *l_expr, symbol_c *r_expr, bool deprecated_operation = false);
 
-    
+    symtable_t* glob_sym_table;
   public:
-    print_datatypes_error_c(symbol_c *ignore);
+    print_datatypes_error_c(symbol_c* ignore, symtable_t* glob_sym_table);
     virtual ~print_datatypes_error_c(void);
     int get_error_count();
 

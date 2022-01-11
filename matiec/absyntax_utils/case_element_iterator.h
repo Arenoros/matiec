@@ -30,7 +30,6 @@
  *
  */
 
-
 /*
  * Case element iterator.
  * Iterate through the elements of a case list.
@@ -45,42 +44,41 @@
  * the good type...case_element_iterator_c
  */
 
-
+#pragma once
 #include "absyntax/visitor.h"
 
-
 class case_element_iterator_c : public null_visitor_c {
-  public:
+public:
     /* A type to specify the type of element.
      */
-    typedef enum {
-      element_single,
-      element_subrange
-    } case_element_t ;
+    typedef enum
+    {
+        element_single,
+        element_subrange
+    } case_element_t;
 
-
-  private:
+private:
     /* a pointer to the case_list_c currently being analyzed */
-    symbol_c *case_list;
+    symbol_c* case_list;
     /* used when called to iterate() for a parameter */
-    symbol_c *current_case_element;
+    symbol_c* current_case_element;
 
     /* used to indicate the type of case element on which iterate */
     case_element_t wanted_element_type;
 
-  private:
-    void* handle_case_element(symbol_c *case_element);
+private:
+    void* handle_case_element(symbol_c* case_element);
 
-    void* iterate_list(list_c *list);
+    void* iterate_list(list_c* list);
 
-  public:
+public:
     /* start off at the first case element once again... */
     void reset(void);
 
     /* initialize the iterator object.
      * We must be given a reference to a case_list_c that will be analyzed...
      */
-    case_element_iterator_c(symbol_c *list, case_element_t element_type);
+    case_element_iterator_c(symbol_c* list, case_element_t element_type);
 
     /* Skip to the next case element of type chosen. After object creation,
      * the object references on case element _before_ the first, so
@@ -89,37 +87,27 @@ class case_element_iterator_c : public null_visitor_c {
      *
      * Returns the case element's symbol!
      */
-    symbol_c *next(void);
+    symbol_c* next(void);
 
-    private:
-    
+private:
     /******************************/
     /* B 1.2.1 - Numeric Literals */
     /******************************/
-    void *visit(integer_c *symbol);
-    void *visit(neg_integer_c *symbol);
+    void* visit(integer_c* symbol);
+    void* visit(neg_integer_c* symbol);
 
     /********************************/
     /* B 1.3.3 - Derived data types */
     /********************************/
     /*  signed_integer DOTDOT signed_integer */
-    void *visit(subrange_c *symbol);
+    void* visit(subrange_c* symbol);
 
     /* enumerated_type_name '#' identifier */
-    void *visit(enumerated_value_c *symbol);
+    void* visit(enumerated_value_c* symbol);
 
     /********************************/
     /* B 3.2.3 Selection Statements */
     /********************************/
-    void *visit(case_list_c *symbol);
+    void* visit(case_list_c* symbol);
 
-    
-
-}; // function_param_iterator_c
-
-
-
-
-
-
-
+};  // function_param_iterator_c

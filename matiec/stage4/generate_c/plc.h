@@ -15,16 +15,14 @@
  * used in safety-critical situations without a full and competent review.
  */
 
-
 #ifndef __PLC_H
 #define __PLC_H
 
-#include <stdio.h>  /* required for declaration of FILE */
+#include <stdio.h> /* required for declaration of FILE */
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 
 #include "types.h"
 #include "log/log.h"
@@ -36,11 +34,10 @@ extern "C" {
 #include "state/state.h"
 #include "rt/rt.h"
 
-
 #define PLC_PT_NAME_MAX_LEN CMM_NAME_MAX_LEN
 
 /*** GENERAL ***/
-int plc_init(char const *module_name, int argc, char **argv);
+int plc_init(char const* module_name, int argc, char** argv);
 int plc_done(void);
 
 /*** SYNCHING ***/
@@ -48,23 +45,22 @@ int plc_scan_beg(void);
 int plc_scan_end(void);
 
 /* memory must be de-allocated with free() */
-const char *plc_module_name(void);
+const char* plc_module_name(void);
 
 /*
  * UTIL functions;
  */
-int plc_print_usage(FILE *output);
+int plc_print_usage(FILE* output);
 /* prints the command line arguments the plc_init() function accepts */
 
 /* not to be used by general plc modules. This function is used by the
  * plc_shutdown() function.
  */
-int plc_init_try(char const *module_name, int argc, char **argv);
-
+int plc_init_try(char const* module_name, int argc, char** argv);
 
 /* plc command line options leader */
 #define CLO_LEADER "--PLC"
-
+// clang-format off
 /* plc command line options */
 #define CLO_plc_id             CLO_LEADER "plc_id="
 #define CLO_loc_local          CLO_LEADER "local"
@@ -76,7 +72,7 @@ int plc_init_try(char const *module_name, int argc, char **argv);
 #define CLO_config_file        CLO_LEADER "conf="
 #define CLO_module_name        CLO_LEADER "module="
 #define CLO_force_init         CLO_LEADER "force-init"
-
+// clang-format on
 
 #ifdef __cplusplus
 }

@@ -87,7 +87,8 @@
 /* set to 1 to see debug info during execution */
 static int debug = 0;
 
-print_datatypes_error_c::print_datatypes_error_c(symbol_c* ignore) {
+print_datatypes_error_c::print_datatypes_error_c(symbol_c* ignore, symtable_t* glob_sym_table)
+    : glob_sym_table(glob_sym_table) {
     error_count = 0;
     warning_found = false;
     current_display_error_level = error_level_default;
@@ -147,10 +148,10 @@ void print_datatypes_error_c::handle_function_invocation(symbol_c* fcall, generi
     if (NULL == f_decl) {
         /* we now try to find any function declaration with the same name, just so we can provide some relevant error
          * messages */
-        function_symtable_t::iterator lower = function_symtable.lower_bound(fcall_data.function_name);
-        if (lower == function_symtable.end())
+        auto lower = glob_sym_table->functions.lower_bound(fcall_data.function_name);
+        if (lower == glob_sym_table->functions.end())
             ERROR;
-        f_decl = function_symtable.get_value(lower);
+        f_decl = glob_sym_table->functions.get_value(lower);
     }
 
     if (NULL != fcall_data.formal_operand_list) {

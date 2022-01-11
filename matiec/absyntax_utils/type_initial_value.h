@@ -30,7 +30,6 @@
  *
  */
 
-
 /*
  * Determine the default initial value of a type declaration.
  *
@@ -56,169 +55,168 @@
  *       this class of object. This class
  *       is therefore a singleton.
  */
-
+#pragma once
 class type_initial_value_c : public null_visitor_c {
+public:
+    static symbol_c* get(symbol_c* type);
 
-  public:
-    static symbol_c *get(symbol_c *type);
-
-  private:
+private:
     /* constants for the default values of elementary data types... */
-    static ref_value_null_literal_c       *null_literal;
-    static real_c                         *real_0;
-    static integer_c                      *integer_0, *integer_1;
-    static boolean_literal_c              *bool_0;
-    static date_literal_c                 *date_literal_0;
-    static daytime_c                      *daytime_literal_0;
-    static duration_c                     *time_0;
-    static date_c                         *date_0;
-    static time_of_day_c                  *tod_0;
-    static date_and_time_c                *dt_0;
-    static single_byte_character_string_c *string_0;
-    static double_byte_character_string_c *wstring_0;
+    static ref_value_null_literal_c* null_literal;
+    static real_c* real_0;
+    static integer_c *integer_0, *integer_1;
+    static boolean_literal_c* bool_0;
+    static date_literal_c* date_literal_0;
+    static daytime_c* daytime_literal_0;
+    static duration_c* time_0;
+    static date_c* date_0;
+    static time_of_day_c* tod_0;
+    static date_and_time_c* dt_0;
+    static single_byte_character_string_c* string_0;
+    static double_byte_character_string_c* wstring_0;
 
-  protected:
+protected:
     type_initial_value_c(void);
 
-  private:
-    static type_initial_value_c *_instance;
-    static type_initial_value_c *instance(void);
-    void *handle_type_spec(symbol_c *base_type_name, symbol_c *type_spec_init);
-    void *handle_type_name(symbol_c *type_name);
+private:
+    static type_initial_value_c* _instance;
+    static type_initial_value_c* instance(void);
+    void* handle_type_spec(symbol_c* base_type_name, symbol_c* type_spec_init);
+    void* handle_type_name(symbol_c* type_name);
 
-  private:
-    void *visit(                 identifier_c *symbol);
-    void *visit(derived_datatype_identifier_c *symbol);
-    void *visit(         poutype_identifier_c *symbol);
+private:
+    void* visit(identifier_c* symbol);
+    void* visit(derived_datatype_identifier_c* symbol);
+    void* visit(poutype_identifier_c* symbol);
 
     /***********************************/
     /* B 1.3.1 - Elementary Data Types */
     /***********************************/
-    void *visit(time_type_name_c *symbol);
-    void *visit(bool_type_name_c *symbol);
-    void *visit(sint_type_name_c *symbol);
-    void *visit(int_type_name_c *symbol);
-    void *visit(dint_type_name_c *symbol);
-    void *visit(lint_type_name_c *symbol);
-    void *visit(usint_type_name_c *symbol);
-    void *visit(uint_type_name_c *symbol);
-    void *visit(udint_type_name_c *symbol);
-    void *visit(ulint_type_name_c *symbol);
-    void *visit(real_type_name_c *symbol);
-    void *visit(lreal_type_name_c *symbol);
-    void *visit(date_type_name_c *symbol);
-    void *visit(tod_type_name_c *symbol);
-    void *visit(dt_type_name_c *symbol);
-    void *visit(byte_type_name_c *symbol);
-    void *visit(word_type_name_c *symbol);
-    void *visit(dword_type_name_c *symbol);
-    void *visit(lword_type_name_c *symbol);
-    void *visit(string_type_name_c *symbol);
-    void *visit(wstring_type_name_c *symbol);
+    void* visit(time_type_name_c* symbol);
+    void* visit(bool_type_name_c* symbol);
+    void* visit(sint_type_name_c* symbol);
+    void* visit(int_type_name_c* symbol);
+    void* visit(dint_type_name_c* symbol);
+    void* visit(lint_type_name_c* symbol);
+    void* visit(usint_type_name_c* symbol);
+    void* visit(uint_type_name_c* symbol);
+    void* visit(udint_type_name_c* symbol);
+    void* visit(ulint_type_name_c* symbol);
+    void* visit(real_type_name_c* symbol);
+    void* visit(lreal_type_name_c* symbol);
+    void* visit(date_type_name_c* symbol);
+    void* visit(tod_type_name_c* symbol);
+    void* visit(dt_type_name_c* symbol);
+    void* visit(byte_type_name_c* symbol);
+    void* visit(word_type_name_c* symbol);
+    void* visit(dword_type_name_c* symbol);
+    void* visit(lword_type_name_c* symbol);
+    void* visit(string_type_name_c* symbol);
+    void* visit(wstring_type_name_c* symbol);
 
-    void *visit(safetime_type_name_c *symbol);
-    void *visit(safebool_type_name_c *symbol);
-    void *visit(safesint_type_name_c *symbol);
-    void *visit(safeint_type_name_c *symbol);
-    void *visit(safedint_type_name_c *symbol);
-    void *visit(safelint_type_name_c *symbol);
-    void *visit(safeusint_type_name_c *symbol);
-    void *visit(safeuint_type_name_c *symbol);
-    void *visit(safeudint_type_name_c *symbol);
-    void *visit(safeulint_type_name_c *symbol);
-    void *visit(safereal_type_name_c *symbol);
-    void *visit(safelreal_type_name_c *symbol);
-    void *visit(safedate_type_name_c *symbol);
-    void *visit(safetod_type_name_c *symbol);
-    void *visit(safedt_type_name_c *symbol);
-    void *visit(safebyte_type_name_c *symbol);
-    void *visit(safeword_type_name_c *symbol);
-    void *visit(safedword_type_name_c *symbol);
-    void *visit(safelword_type_name_c *symbol);
-    void *visit(safestring_type_name_c *symbol);
-    void *visit(safewstring_type_name_c *symbol);
+    void* visit(safetime_type_name_c* symbol);
+    void* visit(safebool_type_name_c* symbol);
+    void* visit(safesint_type_name_c* symbol);
+    void* visit(safeint_type_name_c* symbol);
+    void* visit(safedint_type_name_c* symbol);
+    void* visit(safelint_type_name_c* symbol);
+    void* visit(safeusint_type_name_c* symbol);
+    void* visit(safeuint_type_name_c* symbol);
+    void* visit(safeudint_type_name_c* symbol);
+    void* visit(safeulint_type_name_c* symbol);
+    void* visit(safereal_type_name_c* symbol);
+    void* visit(safelreal_type_name_c* symbol);
+    void* visit(safedate_type_name_c* symbol);
+    void* visit(safetod_type_name_c* symbol);
+    void* visit(safedt_type_name_c* symbol);
+    void* visit(safebyte_type_name_c* symbol);
+    void* visit(safeword_type_name_c* symbol);
+    void* visit(safedword_type_name_c* symbol);
+    void* visit(safelword_type_name_c* symbol);
+    void* visit(safestring_type_name_c* symbol);
+    void* visit(safewstring_type_name_c* symbol);
 
     /********************************/
     /* B 1.3.3 - Derived data types */
     /********************************/
     /*  simple_type_name ':' simple_spec_init */
-    void *visit(simple_type_declaration_c *symbol);
+    void* visit(simple_type_declaration_c* symbol);
 
     /* simple_specification ASSIGN constant */
-    void *visit(simple_spec_init_c *symbol);
+    void* visit(simple_spec_init_c* symbol);
 
     /*  subrange_type_name ':' subrange_spec_init */
-    void *visit(subrange_type_declaration_c *symbol);
+    void* visit(subrange_type_declaration_c* symbol);
 
     /* subrange_specification ASSIGN signed_integer */
-    void *visit(subrange_spec_init_c *symbol);
+    void* visit(subrange_spec_init_c* symbol);
 
     /*  integer_type_name '(' subrange')' */
-    void *visit(subrange_specification_c *symbol);
+    void* visit(subrange_specification_c* symbol);
 
     /*  signed_integer DOTDOT signed_integer */
-    void *visit(subrange_c *symbol);
+    void* visit(subrange_c* symbol);
 
     /*  enumerated_type_name ':' enumerated_spec_init */
-    void *visit(enumerated_type_declaration_c *symbol);
+    void* visit(enumerated_type_declaration_c* symbol);
 
     /* enumerated_specification ASSIGN enumerated_value */
-    void *visit(enumerated_spec_init_c *symbol);
+    void* visit(enumerated_spec_init_c* symbol);
 
     /* helper symbol for enumerated_specification->enumerated_spec_init */
     /* enumerated_value_list ',' enumerated_value */
-    void *visit(enumerated_value_list_c *symbol);
+    void* visit(enumerated_value_list_c* symbol);
 
     /* enumerated_type_name '#' identifier */
     // SYM_REF2(enumerated_value_c, type, value)
-    void *visit(enumerated_value_c *symbol);
+    void* visit(enumerated_value_c* symbol);
 
     /*  identifier ':' array_spec_init */
-    void *visit(array_type_declaration_c *symbol);
+    void* visit(array_type_declaration_c* symbol);
 
     /* array_specification [ASSIGN array_initialization} */
     /* array_initialization may be NULL ! */
-    void *visit(array_spec_init_c *symbol);
+    void* visit(array_spec_init_c* symbol);
 
     /* ARRAY '[' array_subrange_list ']' OF non_generic_type_name */
-    void *visit(array_specification_c *symbol);
+    void* visit(array_specification_c* symbol);
 
     /* helper symbol for array_specification */
     /* array_subrange_list ',' subrange */
-    void *visit(array_subrange_list_c *symbol);
+    void* visit(array_subrange_list_c* symbol);
 
     /* array_initialization:  '[' array_initial_elements_list ']' */
     /* helper symbol for array_initialization */
     /* array_initial_elements_list ',' array_initial_elements */
-    void *visit(array_initial_elements_list_c *symbol);
+    void* visit(array_initial_elements_list_c* symbol);
 
     /* integer '(' [array_initial_element] ')' */
     /* array_initial_element may be NULL ! */
-    void *visit(array_initial_elements_c *symbol);
-    
+    void* visit(array_initial_elements_c* symbol);
+
     /*  structure_type_name ':' structure_specification */
-    void *visit(structure_type_declaration_c *symbol);
+    void* visit(structure_type_declaration_c* symbol);
 
     /* structure_type_name ASSIGN structure_initialization */
     /* structure_initialization may be NULL ! */
-    void *visit(initialized_structure_c *symbol);
-     
+    void* visit(initialized_structure_c* symbol);
+
     /* helper symbol for structure_declaration */
     /* structure_declaration:  STRUCT structure_element_declaration_list END_STRUCT */
     /* structure_element_declaration_list structure_element_declaration ';' */
-    void *visit(structure_element_declaration_list_c *symbol);
-    
+    void* visit(structure_element_declaration_list_c* symbol);
+
     /*  structure_element_name ':' *_spec_init */
-    void *visit(structure_element_declaration_c *symbol);
-    
+    void* visit(structure_element_declaration_c* symbol);
+
     /* helper symbol for structure_initialization */
     /* structure_initialization: '(' structure_element_initialization_list ')' */
     /* structure_element_initialization_list ',' structure_element_initialization */
-    void *visit(structure_element_initialization_list_c *symbol);
-    
+    void* visit(structure_element_initialization_list_c* symbol);
+
     /*  structure_element_name ASSIGN value */
-    void *visit(structure_element_initialization_c *symbol);
-    
+    void* visit(structure_element_initialization_c* symbol);
+
     /*  string_type_name ':' elementary_string_type_name string_type_declaration_size string_type_declaration_init */
     /*
      * NOTE:
@@ -258,16 +256,14 @@ class type_initial_value_c : public null_visitor_c {
      *
      * Route 2:
      * type_declaration: string_type_declaration
-     * string_type_declaration: identifier ':' elementary_string_type_name string_type_declaration_size string_type_declaration_init
-     * (shift:  identifier <- 'new_str_type')
-     * elementary_string_type_name: STRING
-     * (shift: elementary_string_type_name <- STRING)
-     * (shift: string_type_declaration_size <-  empty )
+     * string_type_declaration: identifier ':' elementary_string_type_name string_type_declaration_size
+     * string_type_declaration_init (shift:  identifier <- 'new_str_type') elementary_string_type_name: STRING (shift:
+     * elementary_string_type_name <- STRING) (shift: string_type_declaration_size <-  empty )
      * string_type_declaration_init: ASSIGN character_string
      * (shift: character_string <- "hello!")
      * (reduce: string_type_declaration_init <- ASSIGN character_string)
-     * (reduce: string_type_declaration <- identifier ':' elementary_string_type_name string_type_declaration_size string_type_declaration_init )
-     * (reduce: type_declaration <- string_type_declaration)
+     * (reduce: string_type_declaration <- identifier ':' elementary_string_type_name string_type_declaration_size
+     * string_type_declaration_init ) (reduce: type_declaration <- string_type_declaration)
      *
      *
      * At first glance it seems that removing route 1 would make
@@ -280,20 +276,17 @@ class type_initial_value_c : public null_visitor_c {
      * as would be expected!
      */
     /*  string_type_name ':' elementary_string_type_name string_type_declaration_size string_type_declaration_init */
-     // SYM_REF4(string_type_declaration_c,	string_type_name,
-     //					elementary_string_type_name,
-     //					string_type_declaration_size,
-     // 				string_type_declaration_init) /* may be == NULL! */
-    void *visit(string_type_declaration_c *symbol);
-    
+    // SYM_REF4(string_type_declaration_c,	string_type_name,
+    //					elementary_string_type_name,
+    //					string_type_declaration_size,
+    // 				string_type_declaration_init) /* may be == NULL! */
+    void* visit(string_type_declaration_c* symbol);
+
     /* REF_TO (non_generic_type_name | function_block_type_name) */
-    void *visit(ref_spec_c *symbol);
+    void* visit(ref_spec_c* symbol);
     /* ref_spec [ ASSIGN ref_initialization ]; */
-    void *visit(ref_spec_init_c *symbol);
+    void* visit(ref_spec_init_c* symbol);
     /* identifier ':' ref_spec_init */
-    void *visit(ref_type_decl_c *symbol);
-    
-}; // type_initial_value_c
+    void* visit(ref_type_decl_c* symbol);
 
-
-
+};  // type_initial_value_c

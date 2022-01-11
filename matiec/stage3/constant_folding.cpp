@@ -1574,7 +1574,7 @@ void* constant_propagation_c::handle_var_list_decl(symbol_c* var_list, symbol_c*
     /* find the possible declaration (i.e. the datatype) of the possible FB being instantiated */
     // NOTE: we do not use symbol->datatype so this const propagation algorithm will not depend on the fill/narrow
     // datatypes algorithm!
-    function_block_type_symtable_t::iterator itr = function_block_type_symtable.end();  // assume not a FB!
+    auto itr = function_block_type_symtable.end();  // assume not a FB!
     symbol_c* type_symbol = spec_init_sperator_c::get_spec(type_decl);
     token_c* type_name = dynamic_cast<token_c*>(type_symbol);
     if (type_name != NULL)
@@ -2117,7 +2117,7 @@ void* constant_propagation_c::visit(program_configuration_c* symbol) {
     /* find the declaration (i.e. the datatype) of the program being instantiated */
     // NOTE: we do not use symbol->datatype so this cost propagation algorithm will not depend on the fill/narrow
     // datatypes algorithm!
-    program_type_symtable_t::iterator itr = program_type_symtable.find(symbol->program_type_name);
+    auto itr = program_type_symtable.find(symbol->program_type_name);
     if (itr == program_type_symtable.end())
         ERROR;  // syntax parsing should not allow this!
     program_declaration_c* prog_type = itr->second;
@@ -2152,7 +2152,7 @@ void* constant_propagation_c::visit(fb_task_c* symbol) {
     if (NULL == fb_type_name)
         ERROR;
 
-    function_block_type_symtable_t::iterator itr = function_block_type_symtable.find(fb_type_name);
+    auto itr = function_block_type_symtable.find(fb_type_name);
     if (itr == function_block_type_symtable.end())
         ERROR;  // syntax parsing should not allow this!
     function_block_declaration_c* fb_type_decl = itr->second;

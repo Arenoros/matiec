@@ -142,7 +142,7 @@ public:
     }
 
     void* visit(identifier_c* type_name) {
-        type_symtable_t::iterator iter = type_symtable.end();
+        auto iter = type_symtable.end();
         switch (current_mode) {
         case arraysize_am:
             /* look up the type declaration... */
@@ -557,7 +557,7 @@ public:
     }
 
     void* visit(identifier_c* type_name) {
-        type_symtable_t::iterator iter = type_symtable.end();
+        auto iter = type_symtable.end();
         switch (current_mode) {
         case initdefault_sm:
             /* look up the type declaration... */
@@ -574,7 +574,7 @@ public:
     }
 
     void* visit(derived_datatype_identifier_c* type_name) {
-        type_symtable_t::iterator iter = type_symtable.end();
+        auto iter = type_symtable.end();
         switch (current_mode) {
         case initdefault_sm:
             /* look up the type declaration... */
@@ -2550,7 +2550,7 @@ SYM_TOKEN(incompl_location_c)
 private:
     /* a helper function to the program_configuration_c visitor... */
     void program_constructor_call(program_configuration_c* symbol) {
-        program_type_symtable_t::iterator iter = program_type_symtable.find(symbol->program_type_name);
+        auto iter = program_type_symtable.find(symbol->program_type_name);
         if (iter == program_type_symtable.end())
             ERROR;  // The program being called MUST be in the symtable.
         program_declaration_c* p_decl = iter->second;

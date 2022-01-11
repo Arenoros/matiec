@@ -130,7 +130,7 @@ void lvalue_check_c::check_assignment_to_output(symbol_c *lvalue) {
 	 *       So, as soon as we find one record/structure element that is not a FB, no other record/structure element
 	 *       will be of FB type, which means we can quit this check!
 	 */
-	function_block_type_symtable_t::iterator iter = function_block_type_symtable.find(basetype_id);
+	auto iter = function_block_type_symtable.find(basetype_id);
 	if (function_block_type_symtable.end() == iter) return;
 	function_block_declaration_c *fb_decl = iter->second;
 

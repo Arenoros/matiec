@@ -146,8 +146,8 @@ class populate_enumvalue_symtable_c: public iterator_visitor_c {
     /* this is really an ERROR! The initial value may use the syntax NUM_TYPE#enum_value, but in that case we should not have reached this visit method !! */
     if (symbol->type != NULL) ERROR;  
 
-    symbol_c::enumvalue_symtable_t::iterator lower = enumvalue_symtable->lower_bound(value_str);
-    symbol_c::enumvalue_symtable_t::iterator upper = enumvalue_symtable->upper_bound(value_str);
+    auto lower = enumvalue_symtable->lower_bound(value_str);
+    auto upper = enumvalue_symtable->upper_bound(value_str);
     for (; lower != upper; lower++)
       if (lower->second == current_enumerated_type) {
         /*  The same identifier is used more than once as an enumerated value/constant inside the same enumerated datat type! */

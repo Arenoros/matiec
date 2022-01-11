@@ -30,8 +30,65 @@ parser_t::parser_t()
 
     /* Default values for the command line options... */
     runtime_options.relaxed_datatype_model = false; /* by default use the strict datatype equivalence model */
+    define_global_vars();
 }
+void parser_t::define_global_vars() {
+    /*************************************************************************************************/
+    /* NOTE: These variables are really parameters we would like the stage2__ function to pass       */
+    /*       to the yyparse() function. However, the yyparse() function is created automatically     */
+    /*       by bison, so we cannot add parameters to this function. The only other                  */
+    /*       option is to use global variables! yuck!                                                */
+    /*************************************************************************************************/
 
+    /* A global flag used to tell the parser if overloaded funtions should be allowed.
+     * The IEC 61131-3 standard allows overloaded funtions in the standard library,
+     * but disallows them in user code...
+     *
+     * In essence, a parameter we would like to pass to the yyparse() function but
+     * have to do it using a global variable, as the yyparse() prototype is fixed by bison.
+     */
+    allow_function_overloading = false;
+
+    /* | [var1_list ','] variable_name '..' */
+    /* NOTE: This is an extension to the standard!!! */
+    /* In order to be able to handle extensible standard functions
+     * (i.e. standard functions that may have a variable number of
+     * input parameters, such as AND(word#33, word#44, word#55, word#66),
+     * we have extended the acceptable syntax to allow var_name '..'
+     * in an input variable declaration.
+     *
+     * This allows us to parse the declaration of standard
+     * extensible functions and load their interface definition
+     * into the abstract syntax tree just like we do to other
+     * user defined functions.
+     * This has the advantage that we can later do semantic
+     * checking of calls to functions (be it a standard or user defined
+     * function) in (almost) exactly the same way.
+     *
+     * Of course, we have a flag that disables this syntax when parsing user
+     * written code, so we only allow this extra syntax while parsing the
+     * 'header' file that declares all the standard IEC 61131-3 functions.
+     */
+    allow_extensible_function_parameters = false;
+
+    /* A global flag used to tell the parser whether to allow use of DREF and '^' operators (defined in IEC 61131-3 v3)
+     */
+    allow_ref_dereferencing = false;
+    /* A global flag used to tell the parser whether to allow use of REF_TO ANY datatypes (non-standard extension) */
+    allow_ref_to_any = false;
+    /* A global flag used to tell the parser whether to allow use of REF_TO as a struct or array element (non-standard
+     * extension) */
+    allow_ref_to_in_derived_datatypes = false;
+
+    /* The following function is called automatically by bison whenever it comes across
+     * an error. Unfortunately it calls this function before executing the code that handles
+     * the error itself, so we cannot print out the correct line numbers of the error location
+     * over here.
+     * Our solution is to store the current error message in a global variable, and have all
+     * error action handlers call the function parser->print_err_msg() after setting the location
+     * (line number) variable correctly.
+     */
+}
 void parser_t::print_include_stack() {
     if (!include_stack.empty())
         fprintf(stderr, "in file ");
@@ -51,27 +108,31 @@ void parser_t::UpdateTracking(const char* text) {
 
 int parser_t::get_identifier_token(const char* identifier_str) {
     //  std::cout << "get_identifier_token(" << identifier_str << "): \n";
-    variable_name_symtable_t ::iterator iter1;
-    library_element_symtable_t::iterator iter2;
+    auto iter1 = variable_name_symtable.find(identifier_str);
 
-    if ((iter1 = variable_name_symtable.find(identifier_str)) != variable_name_symtable.end())
+    if (iter1 != variable_name_symtable.end())
         return iter1->second;
-
-    if ((iter2 = library_element_symtable.find(identifier_str)) != library_element_symtable.end())
+    auto iter2 = library_element_symtable.find(identifier_str);
+    if (iter2 != library_element_symtable.end())
         return iter2->second;
 
     return identifier_token;
 }
 
 int parser_t::get_direct_variable_token(const char* direct_variable_str) {
-    direct_variable_symtable_t::iterator iter;
+    auto iter = direct_variable_symtable.find(direct_variable_str);
 
-    if ((iter = direct_variable_symtable.find(direct_variable_str)) != direct_variable_symtable.end())
+    if (iter != direct_variable_symtable.end())
         return iter->second;
 
     return direct_variable_token;
 }
-
+void parser_t::reg_c_var(const char* name) {
+    variable_name_symtable.insert(name, prev_declared_variable_name_token);
+}
+void parser_t::reg_c_func(const char* name) {
+    library_element_symtable.insert(name, prev_declared_derived_function_name_token);
+}
 void parser_t::unput_bodystate_buffer(yyscan_t scanner) {
     if (bodystate_buffer.empty())
         ERROR;

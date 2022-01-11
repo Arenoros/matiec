@@ -30,7 +30,6 @@
  *
  */
 
-
 /*
  * Function call parameter iterator.
  *
@@ -43,31 +42,25 @@
  * function/FB call in that code.
  */
 
-
 #include "function_call_iterator.h"
-#include "main.h" // required for ERROR() and ERROR_MSG() macros.
-
+#include "main.h"  // required for ERROR() and ERROR_MSG() macros.
 
 //#define DEBUG
 #ifdef DEBUG
-#define TRACE(classname) printf("\n____%s____\n",classname);
+#    define TRACE(classname) printf("\n____%s____\n", classname);
 #else
-#define TRACE(classname)
+#    define TRACE(classname)
 #endif
-
-
-
-
 
 /* initialise the iterator object.
  * We must be given a reference to the function declaration
  * that will be analysed...
  */
-function_call_iterator_c::function_call_iterator_c(symbol_c *symbol) {
-  this->start_symbol = symbol;
-  next_fcall = fcall_count = 0;
-  current_finvocation = NULL;
-  current_fcall_name = NULL;
+function_call_iterator_c::function_call_iterator_c(symbol_c* symbol) {
+    this->start_symbol = symbol;
+    next_fcall = fcall_count = 0;
+    current_finvocation = NULL;
+    current_fcall_name = NULL;
 }
 
 /* Skip to the next function call. After object creation,
@@ -77,24 +70,25 @@ function_call_iterator_c::function_call_iterator_c(symbol_c *symbol) {
  *
  * Returns the function_invocation_c!
  */
-//function_invocation_c *next(void) {TRACE("function_call_iterator_c::next(): called ");
-symbol_c *function_call_iterator_c::next(void) {TRACE("function_call_iterator_c::next(): called ");
-  fcall_count = 0;
-  next_fcall++;
-  current_finvocation = NULL;
-  current_fcall_name = NULL;
+// function_invocation_c *next(void) {TRACE("function_call_iterator_c::next(): called ");
+symbol_c* function_call_iterator_c::next(void) {
+    TRACE("function_call_iterator_c::next(): called ");
+    fcall_count = 0;
+    next_fcall++;
+    current_finvocation = NULL;
+    current_fcall_name = NULL;
 
-  start_symbol->accept(*this);
-  return current_finvocation;
+    start_symbol->accept(*this);
+    return current_finvocation;
 }
 
 /* Returns the name of the currently referenced function invocation */
-token_c *function_call_iterator_c::fname(void) {
-  token_c *fname_sym = dynamic_cast<token_c *>(current_fcall_name);
-  if (fname_sym == NULL) ERROR;
-  return fname_sym;
+token_c* function_call_iterator_c::fname(void) {
+    token_c* fname_sym = dynamic_cast<token_c*>(current_fcall_name);
+    if (fname_sym == NULL)
+        ERROR;
+    return fname_sym;
 }
-
 
 /***************************************/
 /* B.3 - Language ST (Structured Text) */
@@ -102,16 +96,14 @@ token_c *function_call_iterator_c::fname(void) {
 /***********************/
 /* B 3.1 - Expressions */
 /***********************/
-  void *function_call_iterator_c::visit(function_invocation_c *symbol) {
+void* function_call_iterator_c::visit(function_invocation_c* symbol) {
     fcall_count++;
     if (next_fcall == fcall_count) {
-      current_finvocation = symbol;
-      current_fcall_name = symbol->function_name;
+        current_finvocation = symbol;
+        current_fcall_name = symbol->function_name;
     }
     return NULL;
-  }
-
-
+}
 
 /****************************************/
 /* B.2 - Language IL (Instruction List) */
@@ -122,29 +114,22 @@ token_c *function_call_iterator_c::fname(void) {
 
 /* | function_name [il_operand_list] */
 // SYM_REF2(il_function_call_c, function_name, il_operand_list)
-  void *function_call_iterator_c::visit(il_function_call_c *symbol) {
+void* function_call_iterator_c::visit(il_function_call_c* symbol) {
     fcall_count++;
     if (next_fcall == fcall_count) {
-      current_finvocation = symbol;
-      current_fcall_name = symbol->function_name;
+        current_finvocation = symbol;
+        current_fcall_name = symbol->function_name;
     }
     return NULL;
-  }
-
-
+}
 
 /* | function_name '(' eol_list [il_param_list] ')' */
 // SYM_REF2(il_formal_funct_call_c, function_name, il_param_list)
-  void *function_call_iterator_c::visit(il_formal_funct_call_c *symbol) {
+void* function_call_iterator_c::visit(il_formal_funct_call_c* symbol) {
     fcall_count++;
     if (next_fcall == fcall_count) {
-      current_finvocation = symbol;
-      current_fcall_name = symbol->function_name;
+        current_finvocation = symbol;
+        current_fcall_name = symbol->function_name;
     }
     return NULL;
-  }
-
-
-
-
-
+}

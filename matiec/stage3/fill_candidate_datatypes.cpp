@@ -129,8 +129,8 @@ public:
         if (symbol->type != NULL)
             ERROR;
 
-        enumerated_value_symtable_t::iterator lower = global_enumerated_value_symtable.lower_bound(symbol->value);
-        enumerated_value_symtable_t::iterator upper = global_enumerated_value_symtable.upper_bound(symbol->value);
+        auto lower = global_enumerated_value_symtable.lower_bound(symbol->value);
+        auto upper = global_enumerated_value_symtable.upper_bound(symbol->value);
         for (; lower != upper; lower++)
             if (lower->second == current_enumerated_type) {
                 /*  The same identifier is used more than once as an enumerated value/constant inside the same
@@ -250,8 +250,8 @@ public:
         if (symbol->type != NULL)
             ERROR;
 
-        enumerated_value_symtable_t::iterator lower = local_enumerated_value_symtable.lower_bound(symbol->value);
-        enumerated_value_symtable_t::iterator upper = local_enumerated_value_symtable.upper_bound(symbol->value);
+        auto lower = local_enumerated_value_symtable.lower_bound(symbol->value);
+        auto upper = local_enumerated_value_symtable.upper_bound(symbol->value);
         for (; lower != upper; lower++)
             if (lower->second == current_enumerated_type) {
                 /*  The same identifier is used more than once as an enumerated value/constant inside the same
@@ -537,8 +537,8 @@ void fill_candidate_datatypes_c::handle_function_call(symbol_c* fcall, generic_f
     if (debug)
         std::cout << "function()\n";
 
-    function_symtable_t::iterator lower = function_symtable.lower_bound(fcall_data.function_name);
-    function_symtable_t::iterator upper = function_symtable.upper_bound(fcall_data.function_name);
+    auto lower = function_symtable.lower_bound(fcall_data.function_name);
+    auto upper = function_symtable.upper_bound(fcall_data.function_name);
     /* If the name of the function being called is not found in the function symbol table, then this is an invalid call
      */
     /* Since the lexical parser already checks for this, then if this occurs then we have an internal compiler error. */
@@ -1231,8 +1231,8 @@ void* fill_candidate_datatypes_c::visit(enumerated_value_c* symbol) {
          * value symbol table!
          */
         enumerated_type = NULL;  // assume error...
-        enumerated_value_symtable_t::iterator lower = global_enumerated_value_symtable.lower_bound(symbol->value);
-        enumerated_value_symtable_t::iterator upper = global_enumerated_value_symtable.upper_bound(symbol->value);
+        auto lower = global_enumerated_value_symtable.lower_bound(symbol->value);
+        auto upper = global_enumerated_value_symtable.upper_bound(symbol->value);
         for (; lower != upper; lower++)
             if (get_datatype_info_c::is_type_equal(base_type(lower->second), base_type(symbol->type)))
                 enumerated_type = symbol->type;

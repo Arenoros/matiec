@@ -1,5 +1,5 @@
 [requires]
-#llvm-core/13.0.0
+llvm-core/13.0.0
 #gtest/1.11.0
 #boost/1.71.0@mps/beta
 

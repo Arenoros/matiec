@@ -30,7 +30,6 @@
  *
  */
 
-
 /*
  * Function call parameter iterator.
  *
@@ -38,30 +37,26 @@
  * a c++ source program equivalent to the IL and ST
  * code.
  */
-
-
+#pragma once
 #include "absyntax/visitor.h"
-
-
 
 /* given a function_body_c, iterate through each
  * function/FB call in that code.
  */
 
 class function_call_iterator_c : public iterator_visitor_c {
-
-  private:
-    symbol_c *start_symbol;
+private:
+    symbol_c* start_symbol;
     int next_fcall, fcall_count;
-    symbol_c *current_fcall_name;
-    symbol_c *current_finvocation;
+    symbol_c* current_fcall_name;
+    symbol_c* current_finvocation;
 
-  public:
+public:
     /* initialise the iterator object.
      * We must be given a reference to the function declaration
      * that will be analysed...
      */
-    function_call_iterator_c(symbol_c *symbol);
+    function_call_iterator_c(symbol_c* symbol);
 
     /* Skip to the next function call. After object creation,
      * the object references _before_ the first, so
@@ -70,37 +65,33 @@ class function_call_iterator_c : public iterator_visitor_c {
      *
      * Returns the function_invocation_c!
      */
-    symbol_c *next(void);
+    symbol_c* next(void);
 
     /* Returns the name of the currently referenced function invocation */
-    token_c *fname(void);
+    token_c* fname(void);
 
-  private:
-  /***************************************/
-  /* B.3 - Language ST (Structured Text) */
-  /***************************************/
-  /***********************/
-  /* B 3.1 - Expressions */
-  /***********************/
-    void *visit(function_invocation_c *symbol);
-  
-  /****************************************/
-  /* B.2 - Language IL (Instruction List) */
-  /****************************************/
-  /***********************************/
-  /* B 2.1 Instructions and Operands */
-  /***********************************/
-  
-  /* | function_name [il_operand_list] */
-  // SYM_REF2(il_function_call_c, function_name, il_operand_list)
-    void *visit(il_function_call_c *symbol);
-  
-  /* | function_name '(' eol_list [il_param_list] ')' */
-  // SYM_REF2(il_formal_funct_call_c, function_name, il_param_list)
-  void *visit(il_formal_funct_call_c *symbol);
+private:
+    /***************************************/
+    /* B.3 - Language ST (Structured Text) */
+    /***************************************/
+    /***********************/
+    /* B 3.1 - Expressions */
+    /***********************/
+    void* visit(function_invocation_c* symbol);
 
-}; // class function_call_iterator_c 
+    /****************************************/
+    /* B.2 - Language IL (Instruction List) */
+    /****************************************/
+    /***********************************/
+    /* B 2.1 Instructions and Operands */
+    /***********************************/
 
+    /* | function_name [il_operand_list] */
+    // SYM_REF2(il_function_call_c, function_name, il_operand_list)
+    void* visit(il_function_call_c* symbol);
 
+    /* | function_name '(' eol_list [il_param_list] ')' */
+    // SYM_REF2(il_formal_funct_call_c, function_name, il_param_list)
+    void* visit(il_formal_funct_call_c* symbol);
 
-
+};  // class function_call_iterator_c

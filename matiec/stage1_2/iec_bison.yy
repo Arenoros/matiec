@@ -137,28 +137,6 @@
          while (0)
 
 #include "main.h" // required for ERROR() and ERROR_MSG() macros.
-/* A global flag used to tell the parser if overloaded funtions should be allowed.
- * The IEC 61131-3 standard allows overloaded funtions in the standard library,
- * but disallows them in user code...
- */
-extern bool allow_function_overloading;
-
-/* A flag to tell the compiler whether to allow the declaration
- * of extensible function (i.e. functions that may have a variable number of
- * input parameters, such as AND(word#33, word#44, word#55, word#66).
- * This is an extension to the standard syntax.
- * See comments below for details why we support this!
- */
-extern bool allow_extensible_function_parameters;
-
-/* A global flag used to tell the parser whether to allow use of DREF and '^' operators (defined in IEC 61131-3 v3) */
-extern bool allow_ref_dereferencing;
-
-/* A global flag used to tell the parser whether to allow use of REF_TO ANY datatypes (non-standard extension to IEC 61131-3 v3) */
-extern bool allow_ref_to_any;
-
-/* A global flag used to tell the parser whether to allow use of REF_TO as a struct or array element (non-standard extension) */
-extern bool allow_ref_to_in_derived_datatypes;
 
 /************************/
 /* forward declarations */
@@ -2923,7 +2901,7 @@ array_specification:
 	 *       which leads to the reduce/reduce conflict, as it is also included in ref_spec.
 	 */
 	{$$ = new array_specification_c($3, $6, locloc(@$));
-	 if (!allow_ref_to_in_derived_datatypes) {
+	 if (!parser->allow_ref_to_in_derived_datatypes) {
 	   parser->print_err_msg(locf(@$), locl(@$), "REF_TO may not be used in an ARRAY specification (use -R option to activate support for this non-standard syntax)."); 
 	   yynerrs++;
 	 }
@@ -3125,7 +3103,7 @@ structure_element_declaration:
 	{$$ = new structure_element_declaration_c($1, $3, locloc(@$)); $$->token = $1->token;}
 | structure_element_name ':' ref_spec_init                              /* non standard extension: Allow use of struct elements storing REF_TO datatypes (either using REF_TO or a previosuly declared ref type) */
 	{ $$ = new structure_element_declaration_c($1, $3, locloc(@$));
-	  if (!allow_ref_to_in_derived_datatypes) {
+	  if (!parser->allow_ref_to_in_derived_datatypes) {
 	    parser->print_err_msg(locf(@$), locl(@$), "REF_TO and reference datatypes may not be used in a STRUCT element (use -R option to activate support for this non-standard syntax)."); 
 	    yynerrs++;
 	  }
@@ -3299,7 +3277,7 @@ ref_spec_non_recursive: /* helper symbol, used to remove a reduce/reduce conflic
 	{$$ = new ref_spec_c($2, locloc(@$));}
 | REF_TO ANY
 	{$$ = new ref_spec_c(new generic_type_any_c(locloc(@2)), locloc(@$));
-	 if (!allow_ref_to_any) {
+	 if (!parser->allow_ref_to_any) {
 	   parser->print_err_msg(locf(@$), locl(@$), "REF_TO ANY datatypes are not allowed (use -R option to activate support for this non-standard syntax)."); 
 	   yynerrs++;
 	 }
@@ -3458,7 +3436,7 @@ symbolic_variable:
 | symbolic_variable '^'     
 	/* Dereferencing operator defined in IEC 61131-3 v3. However, implemented here differently then how it is defined in the standard! See following note for explanation! */
 	{$$ = new deref_operator_c($1, locloc(@$));
-	 if (!allow_ref_dereferencing) {
+	 if (!parser->allow_ref_dereferencing) {
 	   parser->print_err_msg(locf(@$), locl(@$), "Derefencing REF_TO datatypes with '^' is not allowed (use -r option to activate support for this IEC 61131-3 v3 feature)."); 
 	   yynerrs++;
 	 }
@@ -3795,7 +3773,7 @@ var1_list:
 | variable_name integer DOTDOT
 	{$$ = new var1_list_c(locloc(@$)); $$->add_element(new extensible_input_parameter_c($1, $2, locloc(@$)));
 	 parser->variable_name_symtable.insert($1, prev_declared_variable_name_token);
-	 if (!allow_extensible_function_parameters) parser->print_err_msg(locf(@1), locl(@2), "invalid syntax in variable name declaration.");
+	 if (!parser->allow_extensible_function_parameters) parser->print_err_msg(locf(@1), locl(@2), "invalid syntax in variable name declaration.");
 	}
  | var1_list ',' variable_name
 	{$$ = $1; $$->add_element($3);
@@ -3804,7 +3782,7 @@ var1_list:
  | var1_list ',' variable_name integer DOTDOT
 	{$$ = $1; $$->add_element(new extensible_input_parameter_c($3, $4, locloc(@$)));
 	 parser->variable_name_symtable.insert($3, prev_declared_variable_name_token);
-	 if (!allow_extensible_function_parameters) parser->print_err_msg(locf(@1), locl(@2), "invalid syntax in variable name declaration.");
+	 if (!parser->allow_extensible_function_parameters) parser->print_err_msg(locf(@1), locl(@2), "invalid syntax in variable name declaration.");
 	}
 /* ERROR_CHECK_BEGIN */
 | var1_list variable_name
@@ -4889,27 +4867,27 @@ derived_function_name:
   identifier  /* will never occur during normal parsing, only needed for preparsing to change it to a prev_declared_derived_function_name! */
 | prev_declared_derived_function_name
 	{$$ = new identifier_c(((token_c *)$1)->value, locloc(@$)); // transform the poutype_identifier_c into an identifier_c
-	 if (parser->get_preparse_state() && !allow_function_overloading) {parser->print_err_msg(locloc(@$), "Function overloading not allowed. Invalid identifier.\n"); yynerrs++;}
+	 if (parser->get_preparse_state() && !parser->allow_function_overloading) {parser->print_err_msg(locloc(@$), "Function overloading not allowed. Invalid identifier.\n"); yynerrs++;}
 	}
 | AND
 	{$$ = new identifier_c("AND", locloc(@$));
-	 if (!allow_function_overloading) {parser->print_err_msg(locloc(@$), "Function overloading not allowed. Invalid identifier.\n"); yynerrs++;}
+	 if (!parser->allow_function_overloading) {parser->print_err_msg(locloc(@$), "Function overloading not allowed. Invalid identifier.\n"); yynerrs++;}
 	}
 | OR
 	{$$ = new identifier_c("OR", locloc(@$));
-	 if (!allow_function_overloading) {parser->print_err_msg(locloc(@$), "Function overloading not allowed. Invalid identifier.\n"); yynerrs++;}
+	 if (!parser->allow_function_overloading) {parser->print_err_msg(locloc(@$), "Function overloading not allowed. Invalid identifier.\n"); yynerrs++;}
 	}
 | XOR
 	{$$ = new identifier_c("XOR", locloc(@$));
-	 if (!allow_function_overloading) {parser->print_err_msg(locloc(@$), "Function overloading not allowed. Invalid identifier.\n"); yynerrs++;}
+	 if (!parser->allow_function_overloading) {parser->print_err_msg(locloc(@$), "Function overloading not allowed. Invalid identifier.\n"); yynerrs++;}
 	}
 | NOT
 	{$$ = new identifier_c("NOT", locloc(@$));
-	 if (!allow_function_overloading) {parser->print_err_msg(locloc(@$), "Function overloading not allowed. Invalid identifier.\n"); yynerrs++;}
+	 if (!parser->allow_function_overloading) {parser->print_err_msg(locloc(@$), "Function overloading not allowed. Invalid identifier.\n"); yynerrs++;}
 	}
 | MOD
 	{$$ = new identifier_c("MOD", locloc(@$));
-	 if (!allow_function_overloading) {parser->print_err_msg(locloc(@$), "Function overloading not allowed. Invalid identifier.\n"); yynerrs++;}
+	 if (!parser->allow_function_overloading) {parser->print_err_msg(locloc(@$), "Function overloading not allowed. Invalid identifier.\n"); yynerrs++;}
 	}
 ;
 
@@ -8357,70 +8335,6 @@ exit_statement:
 #include <stdio.h>	/* required for printf() */
 #include <errno.h>
 
-
-
-/*************************************************************************************************/
-/* NOTE: These variables are really parameters we would like the stage2__ function to pass       */
-/*       to the yyparse() function. However, the yyparse() function is created automatically     */
-/*       by bison, so we cannot add parameters to this function. The only other                  */
-/*       option is to use global variables! yuck!                                                */ 
-/*************************************************************************************************/
-
-/* A global flag used to tell the parser if overloaded funtions should be allowed.
- * The IEC 61131-3 standard allows overloaded funtions in the standard library,
- * but disallows them in user code...
- *
- * In essence, a parameter we would like to pass to the yyparse() function but
- * have to do it using a global variable, as the yyparse() prototype is fixed by bison.
- */
-bool allow_function_overloading = false;
-
-/* | [var1_list ','] variable_name '..' */
-/* NOTE: This is an extension to the standard!!! */
-/* In order to be able to handle extensible standard functions
- * (i.e. standard functions that may have a variable number of
- * input parameters, such as AND(word#33, word#44, word#55, word#66),
- * we have extended the acceptable syntax to allow var_name '..'
- * in an input variable declaration.
- *
- * This allows us to parse the declaration of standard
- * extensible functions and load their interface definition
- * into the abstract syntax tree just like we do to other 
- * user defined functions.
- * This has the advantage that we can later do semantic
- * checking of calls to functions (be it a standard or user defined
- * function) in (almost) exactly the same way.
- *
- * Of course, we have a flag that disables this syntax when parsing user
- * written code, so we only allow this extra syntax while parsing the 
- * 'header' file that declares all the standard IEC 61131-3 functions.
- */
-bool allow_extensible_function_parameters = false;
-
-/* A global flag used to tell the parser whether to allow use of DREF and '^' operators (defined in IEC 61131-3 v3) */
-bool allow_ref_dereferencing;
-/* A global flag used to tell the parser whether to allow use of REF_TO ANY datatypes (non-standard extension) */
-bool allow_ref_to_any = false;
-/* A global flag used to tell the parser whether to allow use of REF_TO as a struct or array element (non-standard extension) */
-bool allow_ref_to_in_derived_datatypes = false;
-
-
-/* The following function is called automatically by bison whenever it comes across
- * an error. Unfortunately it calls this function before executing the code that handles
- * the error itself, so we cannot print out the correct line numbers of the error location
- * over here.
- * Our solution is to store the current error message in a global variable, and have all
- * error action handlers call the function parser->print_err_msg() after setting the location
- * (line number) variable correctly.
- */
-const char *current_error_msg;
-void yyerror (const char *error_msg) {
-  current_error_msg = error_msg;
-/* fprintf(stderr, "error %d: %s\n", yynerrs // global variable //, error_msg); */
-/*  print_include_stack(); */
-}
-
-
 /* ERROR_CHECK_BEGIN */
 bool is_current_syntax_token(int token) {
   switch (token) {
@@ -8462,7 +8376,7 @@ bool is_current_syntax_token(int token) {
 /*
 identifier_c *token_2_identifier_c(char *value, ) {
   identifier_c tmp = new identifier_c(value, locloc(@$));
-	 if (!allow_function_overloading) {
+	 if (!parser->allow_function_overloading) {
 	   fprintf(stderr, "Function overloading not allowed. Invalid identifier %s\n", ((token_c *)($$))->value);
 	   ERROR;
 	 }

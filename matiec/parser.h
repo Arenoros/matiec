@@ -2,6 +2,7 @@
 
 #include "traking.h"
 #include "util/symtable.h"
+#include "absyntax_utils/absyntax_utils.h"
 
 #define MAX_LINE_LENGTH 1024
 typedef void* yyscan_t;
@@ -10,7 +11,7 @@ struct parser_t {
     typedef symtable_c<int> library_element_symtable_t;
     typedef symtable_c<int> variable_name_symtable_t;
     typedef symtable_c<int> direct_variable_symtable_t;
-
+    symtable_t context;
     symbol_c* tree_root;
     symbol_c* ordered_root;
     tracking_t* current_tracking;
@@ -25,11 +26,38 @@ struct parser_t {
 
     int include_stack_ptr = 0;
     long int current_order = 0;
+
+    /* A global flag used to tell the parser if overloaded funtions should be allowed.
+     * The IEC 61131-3 standard allows overloaded funtions in the standard library,
+     * but disallows them in user code...
+     */
+    bool allow_function_overloading;
+
+    /* A flag to tell the compiler whether to allow the declaration
+     * of extensible function (i.e. functions that may have a variable number of
+     * input parameters, such as AND(word#33, word#44, word#55, word#66).
+     * This is an extension to the standard syntax.
+     * See comments below for details why we support this!
+     */
+    bool allow_extensible_function_parameters;
+
+    /* A global flag used to tell the parser whether to allow use of DREF and '^' operators (defined in IEC 61131-3 v3)
+     */
+    bool allow_ref_dereferencing;
+
+    /* A global flag used to tell the parser whether to allow use of REF_TO ANY datatypes (non-standard extension to IEC
+     * 61131-3 v3) */
+    bool allow_ref_to_any;
+
+    /* A global flag used to tell the parser whether to allow use of REF_TO as a struct or array element (non-standard
+     * extension) */
+    bool allow_ref_to_in_derived_datatypes;
+
     /*************************/
     /* Tracking Functions... */
     /*************************/
     parser_t();
-
+    void define_global_vars();
     list_c* root() const {
         return (list_c*)tree_root;
     }
@@ -213,6 +241,9 @@ struct parser_t {
      * the function currently being parsed...
      */
     /* static */ direct_variable_symtable_t direct_variable_symtable;
+
+    void reg_c_var(const char* name);
+    void reg_c_func(const char* name);
 
     void unput_bodystate_buffer(yyscan_t scanner);
 

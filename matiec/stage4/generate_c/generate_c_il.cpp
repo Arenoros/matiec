@@ -1060,7 +1060,7 @@ void *visit(il_fb_call_c *symbol) {
   if (function_block_type_name == NULL) ERROR;
 
   /* Now find the declaration of the function block type being called... */
-  function_block_type_symtable_t::iterator iter = function_block_type_symtable.find(function_block_type_name);
+  auto iter = function_block_type_symtable.find(function_block_type_name);
   if (iter == function_block_type_symtable.end()) ERROR; // The function block type being called MUST be in the symtable.
   function_block_declaration_c *fb_decl = iter->second;
 

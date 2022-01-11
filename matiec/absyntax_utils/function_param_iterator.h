@@ -30,7 +30,6 @@
  *
  */
 
-
 /*
  * Function parameter iterator.
  * Iterate through the in/out parameters of a function declaration.
@@ -45,13 +44,11 @@
  * function in/out/inout parameter, returning the name
  * of each parameter...function_param_iterator_c
  */
-
-
+#pragma once
 #include "absyntax/visitor.h"
 
-
 class function_param_iterator_c : public null_visitor_c {
-  public:
+public:
     /* A type to specify the type of parameter.
      * VAR_INPUT => direction_in
      * VAR_OUTPUT => direction_out
@@ -73,21 +70,26 @@ class function_param_iterator_c : public null_visitor_c {
      * that should be refernced by the VAR_EXTERNAL variables. The direction_extref will
      * be used to identify these parameters!
      */
-    typedef enum {direction_in, direction_out, direction_inout, direction_extref} param_direction_t ;
+    typedef enum
+    {
+        direction_in,
+        direction_out,
+        direction_inout,
+        direction_extref
+    } param_direction_t;
 
-
-  private:
+private:
     /* a pointer to the function_block_declaration_c
-    * or function_declaration_c currently being analysed.
-    */
-    symbol_c *f_decl;
+     * or function_declaration_c currently being analysed.
+     */
+    symbol_c* f_decl;
     int next_param, param_count;
     /* used when called to search() for a parameter by name */
-    identifier_c *search_param_name;
+    identifier_c* search_param_name;
     /* used when called to iterate() for a parameter */
-    identifier_c *current_param_name;
-    symbol_c *current_param_type;
-    symbol_c *current_param_default_value;
+    identifier_c* current_param_name;
+    symbol_c* current_param_type;
+    symbol_c* current_param_default_value;
     param_direction_t current_param_direction;
     bool en_eno_param_implicit;
     /* used when we reach an extensible parameter in the function declaration */
@@ -97,26 +99,30 @@ class function_param_iterator_c : public null_visitor_c {
      *       See absyntax.def or iec.y for more details.
      */
     bool current_param_is_extensible;
-    int  current_extensible_param_index;
-    int  _first_extensible_param_index;
+    int current_extensible_param_index;
+    int _first_extensible_param_index;
 
     /* Which operation of the class was called...
      * Search a parameter, or iterate to the next parameter.
      */
-    typedef enum {iterate_op, search_op} operation_t;
+    typedef enum
+    {
+        iterate_op,
+        search_op
+    } operation_t;
     operation_t current_operation;
-    
+
     /* the last parameter/value returned by search() or next() */
-    symbol_c *last_returned_parameter; 
-    
-  private:
-    int   cmp_extparam_names(const char* s1, const char* s2);
-    void* handle_param_list(list_c *list);
-    void* handle_single_param(symbol_c *var_name);
+    symbol_c* last_returned_parameter;
 
-    void* iterate_list(list_c *list);
+private:
+    int cmp_extparam_names(const char* s1, const char* s2);
+    void* handle_param_list(list_c* list);
+    void* handle_single_param(symbol_c* var_name);
 
-  public:
+    void* iterate_list(list_c* list);
+
+public:
     /* start off at the first parameter once again... */
     void reset(void);
 
@@ -127,7 +133,7 @@ class function_param_iterator_c : public null_visitor_c {
      *     - program_declaration_c
      * that will be analysed...
      */
-    function_param_iterator_c(symbol_c *pou_decl);
+    function_param_iterator_c(symbol_c* pou_decl);
 
     /* Skip to the next parameter. After object creation,
      * the object references on parameter _before_ the first, so
@@ -136,25 +142,25 @@ class function_param_iterator_c : public null_visitor_c {
      *
      * Returns the parameter's name!
      */
-    identifier_c *next(void);
+    identifier_c* next(void);
 
     /* Search for the parameter named <param_name>...  */
-    /* The seach() function does not in any way affect the internal state related 
+    /* The seach() function does not in any way affect the internal state related
      * to the iterate() function.
      * It will, however, affect the internal state necessary to correctly
      * return the param_type(), default_value() and is_en_eno_param_implicit()
      * of the found parameter.
      */
-    identifier_c *search(symbol_c *param_name);
-    identifier_c *search(const char *param_name);
+    identifier_c* search(symbol_c* param_name);
+    identifier_c* search(const char* param_name);
 
     /* Returns the currently referenced parameter's default value,
      * or NULL if none is specified in the function declrataion itself.
      */
-    symbol_c *default_value(void);
+    symbol_c* default_value(void);
 
     /* Returns the currently referenced parameter's type name. */
-    symbol_c *param_type(void);
+    symbol_c* param_type(void);
 
     /* Returns if currently referenced parameter is an implicit defined EN/ENO parameter. */
     bool is_en_eno_param_implicit(void);
@@ -162,62 +168,61 @@ class function_param_iterator_c : public null_visitor_c {
     /* Returns if currently referenced parameter is an extensible parameter. */
     /* extensible paramters only occur in some standard functions, e.g. AND(word#34, word#44, word#65); */
     bool is_extensible_param(void);
-    /* Returns the index of the current extensible parameter. */             
+    /* Returns the index of the current extensible parameter. */
     /* If the current parameter is not an extensible paramter, returns -1 */
     int extensible_param_index(void);
-    /* Returns the index of the first extensible parameter, or -1 if no extensible parameter found. */             
+    /* Returns the index of the first extensible parameter, or -1 if no extensible parameter found. */
     /* WARNING: Will only return the correct value _after_ an extensible parameter has been found! */
     int first_extensible_param_index(void);
-    
+
     /* Returns the currently referenced parameter's data passing direction.
      * i.e. VAR_INPUT, VAR_OUTPUT or VAR_INOUT
      */
     param_direction_t param_direction(void);
 
-    private:
-    void *visit(implicit_definition_c *symbol);
+private:
+    void* visit(implicit_definition_c* symbol);
     /******************************************/
     /* B 1.4.3 - Declaration & Initialisation */
     /******************************************/
-    void *visit(input_declarations_c *symbol);
+    void* visit(input_declarations_c* symbol);
 
-    void *visit(input_declaration_list_c *symbol);
+    void* visit(input_declaration_list_c* symbol);
 
-    void *visit(edge_declaration_c *symbol);
-    void *visit(en_param_declaration_c *symbol);
+    void* visit(edge_declaration_c* symbol);
+    void* visit(en_param_declaration_c* symbol);
     /* var1_list ':' array_spec_init */
-    //SYM_REF2(array_var_init_decl_c, var1_list, array_spec_init)
-    void *visit(array_var_init_decl_c *symbol);
-    
+    // SYM_REF2(array_var_init_decl_c, var1_list, array_spec_init)
+    void* visit(array_var_init_decl_c* symbol);
+
     /*  var1_list ':' initialized_structure */
-    //SYM_REF2(structured_var_init_decl_c, var1_list, initialized_structure)
-    void *visit(structured_var_init_decl_c *symbol);
-    
+    // SYM_REF2(structured_var_init_decl_c, var1_list, initialized_structure)
+    void* visit(structured_var_init_decl_c* symbol);
+
     /* name_list ':' function_block_type_name ASSIGN structure_initialization */
     /* structure_initialization -> may be NULL ! */
     // SYM_REF4(fb_name_decl_c, fb_name_list, function_block_type_name, structure_initialization, unused)
-    void *visit(fb_name_decl_c *symbol);
+    void* visit(fb_name_decl_c* symbol);
 
     /* name_list ',' fb_name */
     // SYM_LIST(fb_name_list_c)
-    void *visit(fb_name_list_c *symbol);
-    
-    void *visit(output_declarations_c *symbol);
-    void *visit(eno_param_declaration_c *symbol);
-    void *visit(input_output_declarations_c *symbol);
-    void *visit(var_declaration_list_c *symbol);
+    void* visit(fb_name_list_c* symbol);
 
+    void* visit(output_declarations_c* symbol);
+    void* visit(eno_param_declaration_c* symbol);
+    void* visit(input_output_declarations_c* symbol);
+    void* visit(var_declaration_list_c* symbol);
 
     /*  var1_list ':' array_specification */
-    //SYM_REF2(array_var_declaration_c, var1_list, array_specification)
-    void *visit(array_var_declaration_c *symbol);
+    // SYM_REF2(array_var_declaration_c, var1_list, array_specification)
+    void* visit(array_var_declaration_c* symbol);
 
     /*  var1_list ':' structure_type_name */
-    //SYM_REF2(structured_var_declaration_c, var1_list, structure_type_name)
-    void *visit(structured_var_declaration_c *symbol);
+    // SYM_REF2(structured_var_declaration_c, var1_list, structure_type_name)
+    void* visit(structured_var_declaration_c* symbol);
 
     /* VAR [CONSTANT] var_init_decl_list END_VAR */
-    void *visit(var_declarations_c *symbol);
+    void* visit(var_declarations_c* symbol);
 
 #if 0
 /*  VAR RETAIN var_init_decl_list END_VAR */
@@ -239,17 +244,18 @@ SYM_REF4(located_var_decl_c, variable_name, location, located_var_spec_init, unu
     /*| VAR_EXTERNAL [CONSTANT] external_declaration_list END_VAR */
     /* option -> may be NULL ! */
     // SYM_REF2(external_var_declarations_c, option, external_declaration_list)
-    void *visit(external_var_declarations_c *symbol);
+    void* visit(external_var_declarations_c* symbol);
 
     /* helper symbol for external_var_declarations */
     /*| external_declaration_list external_declaration';' */
     // SYM_LIST(external_declaration_list_c)
-    void *visit(external_declaration_list_c *symbol);
+    void* visit(external_declaration_list_c* symbol);
 
-    /*  global_var_name ':' (simple_specification|subrange_specification|enumerated_specification|array_specification|prev_declared_structure_type_name|function_block_type_name */
-    //SYM_REF2(external_declaration_c, global_var_name, specification)
-    void *visit(external_declaration_c *symbol);
-
+    /*  global_var_name ':'
+     * (simple_specification|subrange_specification|enumerated_specification|array_specification|prev_declared_structure_type_name|function_block_type_name
+     */
+    // SYM_REF2(external_declaration_c, global_var_name, specification)
+    void* visit(external_declaration_c* symbol);
 
 #if 0
 /*| VAR_GLOBAL [CONSTANT|RETAIN] global_var_decl_list END_VAR */
@@ -304,26 +310,24 @@ SYM_REF4(incompl_located_var_decl_c, variable_name, incompl_location, var_spec, 
 SYM_TOKEN(incompl_location_c)
 #endif
 
-
-    void *visit(var1_init_decl_c *symbol);
-    void *visit(var1_list_c *symbol);
-    void *visit(var_init_decl_list_c *symbol);
-
+    void* visit(var1_init_decl_c* symbol);
+    void* visit(var1_list_c* symbol);
+    void* visit(var_init_decl_list_c* symbol);
 
     /***********************/
     /* B 1.5.1 - Functions */
     /***********************/
-    void *visit(function_declaration_c *symbol);
+    void* visit(function_declaration_c* symbol);
     /* intermediate helper symbol for function_declaration */
-    void *visit(var_declarations_list_c *symbol);
-    void *visit(function_var_decls_c *symbol);
-
+    void* visit(var_declarations_list_c* symbol);
+    void* visit(function_var_decls_c* symbol);
 
     /*****************************/
     /* B 1.5.2 - Function Blocks */
     /*****************************/
-    /*  FUNCTION_BLOCK derived_function_block_name io_OR_other_var_declarations function_block_body END_FUNCTION_BLOCK */
-    void *visit(function_block_declaration_c *symbol);
+    /*  FUNCTION_BLOCK derived_function_block_name io_OR_other_var_declarations function_block_body END_FUNCTION_BLOCK
+     */
+    void* visit(function_block_declaration_c* symbol);
 
     /* intermediate helper symbol for function_declaration */
     /*  { io_var_declarations | other_var_declarations }   */
@@ -332,19 +336,18 @@ SYM_TOKEN(incompl_location_c)
      */
 
     /*  VAR_TEMP temp_var_decl_list END_VAR */
-    void *visit(temp_var_decls_c *symbol);
-    void *visit(temp_var_decls_list_c *symbol);
+    void* visit(temp_var_decls_c* symbol);
+    void* visit(temp_var_decls_list_c* symbol);
 
     /*  VAR NON_RETAIN var_init_decl_list END_VAR */
-    void *visit(non_retentive_var_decls_c *symbol);
-
+    void* visit(non_retentive_var_decls_c* symbol);
 
     /**********************/
     /* B 1.5.3 - Programs */
     /**********************/
     /*  PROGRAM program_type_name program_var_declarations_list function_block_body END_PROGRAM */
     // SYM_REF4(program_declaration_c, program_type_name, var_declarations, function_block_body, unused)
-    void *visit(program_declaration_c *symbol);
+    void* visit(program_declaration_c* symbol);
 
     /* intermediate helper symbol for program_declaration_c */
     /*  { io_var_declarations | other_var_declarations }   */
@@ -352,11 +355,4 @@ SYM_TOKEN(incompl_location_c)
      * NOTE: we re-use the var_declarations_list_c
      */
 
-}; // function_param_iterator_c
-
-
-
-
-
-
-
+};  // function_param_iterator_c

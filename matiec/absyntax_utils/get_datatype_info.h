@@ -39,6 +39,7 @@
  *    In this case, we shall first serach for the basetype declaration using search_base_type_c, and then 
  *    run the normal process.
  */
+#pragma once
 
 #include "absyntax_utils.h"
 

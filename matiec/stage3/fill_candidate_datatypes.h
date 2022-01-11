@@ -49,7 +49,7 @@
  *          visitor class will only work corretly if it is asked to visit a symbol of class library_c!!
  */
 
-
+#pragma once
 #include "absyntax_utils/absyntax_utils.h"
 #include "datatype_functions.h"
 
